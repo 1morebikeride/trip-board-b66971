@@ -269,7 +269,7 @@
       <h2 style="margin-top:28px">All days</h2>
       <div class="grid-all" id="all"></div>
       <footer>
-        Numbers on the focused-day map match activity numbers. Maps load only for the selected day (faster). Each day starts in full overview — use ◀ ▶ to walk stops.
+        Numbers on the map match activity numbers. Each day starts in full overview — use ◀ ▶ under that day’s map to walk stops in order.
         Travel times are door-to-door estimates. Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
       </footer>
     </div>
@@ -381,7 +381,7 @@
           </div>
         </div>
         ${compact ? "" : `<img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />`}
-        ${compact ? "" : `<div class="map-wrap">
+        <div class="map-wrap">
           <div class="map" id="${mapId}" data-day-id="${day.id}"></div>
           <div class="map-tour" data-map-id="${mapId}">
             <button type="button" class="map-prev" aria-label="Previous activity">◀</button>
@@ -391,7 +391,7 @@
             </div>
             <button type="button" class="map-next" aria-label="Next activity">▶</button>
           </div>
-        </div>`}
+        </div>
         <div class="card-body">
           <div class="total">
             <strong>Day total · ${formatUsdRange(total.min, total.max)} / person</strong>
