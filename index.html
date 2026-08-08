@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Asia Trip 2026 — Clay & Tom</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --panel2: #1e2330;
+      --text: #e8eaef;
+      --muted: #9aa3b5;
+      --line: #2a3142;
+      --accent: #6ea8fe;
+      --warn: #f0b429;
+      --ok: #3ecf8e;
+      --tokyo: #6ea8fe;
+      --osaka: #f0b429;
+      --kyoto: #3ecf8e;
+      --seoul: #c084fc;
+      --travel: #9aa3b5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 80px; }
+
+    /* Password gate */
+    #gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    #gate.hidden { display: none; }
+    #app.hidden { display: none; }
+    .gate-card {
+      width: min(400px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .gate-card h1 { font-size: 1.25rem; margin: 0 0 8px; }
+    .gate-card p { color: var(--muted); margin: 0 0 16px; font-size: 0.95rem; }
+    .gate-card input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .gate-card button, .filters button, .day-nav button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #081018;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .gate-error { color: #ff7b72; font-size: 0.9rem; min-height: 1.2em; }
+
+    header h1 { margin: 0 0 6px; font-size: 1.75rem; }
+    header p { margin: 0; color: var(--muted); }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .stat strong { display: block; font-size: 1.1rem; }
+    .stat span { color: var(--muted); font-size: 0.8rem; }
+
+    .banner {
+      background: #2a2416;
+      border: 1px solid #5c4a1f;
+      color: #f5d78e;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .filters button, .day-nav button {
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .filters button.active { background: var(--accent); color: #081018; border-color: transparent; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 16px; }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .pill.active { outline: 2px solid var(--accent); }
+    .pill.book { border-color: #7a6118; }
+    .pill .city { opacity: 0.75; }
+
+    .day-nav { display: flex; gap: 8px; margin-bottom: 12px; }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel2);
+    }
+    .card-head h2 { margin: 0; font-size: 1.05rem; }
+    .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #243044;
+      color: var(--text);
+    }
+    .badge.tokyo { background: #1c3358; }
+    .badge.osaka { background: #4a3a12; }
+    .badge.kyoto { background: #163828; }
+    .badge.seoul { background: #3a2458; }
+    .badge.travel { background: #2a2f3a; }
+    .badge.book { background: #4a3a12; color: #f5d78e; }
+    .badge.prep { background: #1c3358; }
+    .badge.none { background: #163828; }
+
+    .hero {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+    .card-body { padding: 16px; display: grid; gap: 14px; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .total {
+      background: #182033;
+      border: 1px solid #2f4570;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .total strong { font-size: 1.05rem; }
+
+    .activity {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .activity:last-child { border-bottom: 0; }
+    .activity .cost { font-weight: 600; white-space: nowrap; }
+
+    /* Real CSS tooltip */
+    .tip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tip-btn {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      color: var(--muted);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      cursor: help;
+      line-height: 1;
+      padding: 0;
+    }
+    .tip .bubble {
+      position: absolute;
+      left: 0;
+      bottom: calc(100% + 8px);
+      width: min(320px, 70vw);
+      background: #0b0d12;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,.45);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 20;
+    }
+    .tip:hover .bubble,
+    .tip:focus-within .bubble,
+    .tip.open .bubble {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .tip .bubble::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 100%;
+      border: 6px solid transparent;
+      border-top-color: var(--line);
+    }
+
+    .book-list, .stay-detail { color: var(--muted); font-size: 0.92rem; }
+    .grid-all {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    @media (min-width: 860px) {
+      .grid-all { grid-template-columns: 1fr 1fr; }
+    }
+    footer { margin-top: 28px; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div id="gate">
+    <div class="gate-card">
+      <h1>Asia Trip 2026</h1>
+      <p>Private itinerary for Clay & Tom. Enter the shared password to open.</p>
+      <form id="gate-form">
+        <input id="pw" type="password" placeholder="Password" autocomplete="current-password" />
+        <button type="submit">Unlock</button>
+        <div class="gate-error" id="gate-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+    <div class="wrap">
+      <header>
+        <h1>Asia Trip 2026</h1>
+        <p>Clay & Tom · Tokyo → Osaka → Ritz Kyoto → Seoul · Aug 27 – Sept 11</p>
+      </header>
+
+      <div class="stats" id="stats"></div>
+      <div class="banner">
+        Book first: Millennials Shibuya · iloha Namba · Ritz Kyoto · Time Travelers Hongdae · plat hostel Haneda · KIX→ICN · ICN→HND
+      </div>
+
+      <div class="filters" id="filters"></div>
+      <div class="pill-row" id="pills"></div>
+      <div class="day-nav">
+        <button type="button" id="prev">Prev</button>
+        <button type="button" id="next">Next</button>
+      </div>
+
+      <div id="focus"></div>
+
+      <h2 style="margin-top:28px">All days</h2>
+      <div class="grid-all" id="all"></div>
+
+      <footer>
+        Costs ~¥158/$ · ~₩1,407/$ (Aug 2026). Hover or tap the <strong>?</strong> for activity details. Names with links open guides.
+        Ritz nights are $0 cash (points). Unlisted page — don’t post publicly.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+window.DAYS = [
+  {
+    id: "aug27",
+    date: "Aug 27",
+    weekday: "Thu",
+    city: "travel",
+    title: "Depart US",
+    image:
+      "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Airport",
+    location: "IAD (Clay) / Tom outbound · overnight",
+    activities: [
+      {
+        name: "Airport → overnight flight",
+        cost: "Already booked",
+        excludeFromTotal: true,
+        blurb: "Clay UA803 IAD→HND · Tom UA79 · screenshots of boarding passes.",
+        url: "https://www.united.com/",
+      },
+      {
+        name: "Airplane food / snacks",
+        cost: "~$15–30",
+        blurb: "Eat a real meal before boarding; plane food is backup only.",
+      },
+    ],
+    stay: "In the air",
+    stayDetail: "No hotel tonight",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "No stay",
+    book: [],
+    actionKind: "prep",
+  },
+  {
+    id: "aug28",
+    date: "Aug 28",
+    weekday: "Fri",
+    city: "tokyo",
+    title: "Arrive · Shinjuku night",
+    image:
+      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Tokyo night",
+    location: "HND → Shibuya base · night in Shinjuku",
+    activities: [
+      {
+        name: "Keikyu/train HND → Shibuya",
+        cost: "¥500–800 (~$3–5)",
+        blurb: "Keikyu Airport Line into the city; Suica/Pasmo taps make this easy.",
+        url: "https://www.japan-guide.com/e/e2170.html",
+      },
+      {
+        name: "Konbini survival kit",
+        cost: "¥1–2k (~$6–13)",
+        blurb: "Water, Pocari, onigiri, egg sandwich — 7-Eleven / FamilyMart / Lawson.",
+        url: "https://www.japan-guide.com/e/e2012.html",
+      },
+      {
+        name: "Omoide Yokocho yakitori + beers",
+        cost: "¥3–5k (~$19–32)",
+        blurb: "Tiny alley under Shinjuku tracks; point at the grill, cash-friendly.",
+        url: "https://www.japan-guide.com/e/e3035.html",
+      },
+      {
+        name: "Golden Gai (cover + 1–2 drinks/bar)",
+        cost: "¥3–6k (~$19–38)",
+        blurb: "Cluster of tiny bars; cover charge normal. Hop 2–3. Skip Kabukicho touts.",
+        url: "https://www.japan-guide.com/e/e3034_golden_gai.html",
+      },
+    ],
+    stay: "The Millennials Shibuya",
+    stayDetail: "~5 min walk Shibuya Station · ~¥6–9k/night (~$38–57) dorm · Alt: UNPLAN Shinjuku",
+    stayUrl: "https://www.hostelworld.com/hostels/p/285601/the-millennials-shibuya/",
+    stayUsdMin: 38,
+    stayUsdMax: 57,
+    stayCostNote: "Millennials dorm",
+    book: ["Tokyo hostel Aug 28–31 (Millennials Shibuya)"],
+    actionKind: "book",
+  },
+  {
+    id: "aug29",
+    date: "Aug 29",
+    weekday: "Sat",
+    city: "tokyo",
+    title: "Shibuya / Harajuku",
+    image:
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo_Shibuya_Scramble_Crossing_2018-10-09.jpg?width=900",
+    imageAlt: "Shibuya scramble",
+    location: "Meiji → Harajuku → Shibuya (walkable)",
+    activities: [
+      {
+        name: "Meiji Shrine + Yoyogi",
+        cost: "Free",
+        blurb: "Forest shrine next to Harajuku; go early, then cut through Yoyogi Park.",
+        url: "https://www.meijijingu.or.jp/en/",
+      },
+      {
+        name: "Shibuya Sky (book timed)",
+        cost: "¥2,700–3,400 (~$17–22)",
+        blurb: "Open-air rooftop on Scramble Square; evening slots cost more and sell out.",
+        url: "https://www.shibuya-scramble-square.com/sky/",
+      },
+      {
+        name: "Yakiniku dinner (Ushifuji/Jojoen)",
+        cost: "¥8–15k (~$50–95)",
+        blurb: "Table-grill wagyu night — book on TableCheck. Interactive buddy-trip meal.",
+        url: "https://www.tablecheck.com/",
+      },
+      {
+        name: "Karaoke nomihodai 2–3h",
+        cost: "¥2–4k (~$13–25)",
+        blurb: "Private room + all-you-can-drink. Big Echo / Karaoke Kan near Shibuya.",
+        url: "https://www.japan-guide.com/e/e2369.html",
+      },
+      {
+        name: "Optional club (ATOM/Womb)",
+        cost: "¥2–4k (~$13–25) entry",
+        blurb: "Dogenzaka clubs — ATOM open-format, Womb techno. Floors fill after midnight.",
+        url: "https://www.womb.co.jp/",
+      },
+    ],
+    stay: "The Millennials Shibuya",
+    stayDetail: "Same hostel — stumble home after karaoke/club",
+    stayUrl: "https://www.hostelworld.com/hostels/p/285601/the-millennials-shibuya/",
+    stayUsdMin: 38,
+    stayUsdMax: 57,
+    stayCostNote: "Millennials dorm",
+    book: ["Shibuya Sky ticket", "Yakiniku reservation (TableCheck)"],
+    actionKind: "book",
+  },
+  {
+    id: "aug30",
+    date: "Aug 30",
+    weekday: "Sun",
+    city: "tokyo",
+    title: "Asakusa + teamLab",
+    image:
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Senso-ji",
+    location: "Asakusa → Toyosu (east corridor)",
+    activities: [
+      {
+        name: "Metro to Asakusa",
+        cost: "¥200–300 (~$1–2)",
+        blurb: "Ginza Line to Asakusa Station; easy from Shibuya with one transfer.",
+        url: "https://www.japan-guide.com/e/e2359_002.html",
+      },
+      {
+        name: "Senso-ji",
+        cost: "Free",
+        blurb: "Tokyo’s oldest temple + Nakamise shopping street. Go before tour buses.",
+        url: "https://www.senso-ji.jp/english/",
+      },
+      {
+        name: "teamLab Planets timed entry",
+        cost: "¥3,600+ (~$23+)",
+        blurb: "Immersive digital art in Toyosu; barefoot, water rooms — book timed tickets.",
+        url: "https://www.teamlab.art/e/planets/",
+      },
+      {
+        name: "Standing sushi / casual dinner",
+        cost: "¥2–5k (~$13–32)",
+        blurb: "Quick counter sushi near Toyosu/Ginza — no multi-month omakase needed.",
+        url: "https://www.japan-guide.com/e/e2036.html",
+      },
+      {
+        name: "Soft Shinjuku night / arcades",
+        cost: "¥2–5k (~$13–32)",
+        blurb: "Lighter Golden Gai or Kabukicho arcades. Skip Robot Restaurant.",
+        url: "https://www.japan-guide.com/e/e3034.html",
+      },
+    ],
+    stay: "The Millennials Shibuya",
+    stayDetail: "Last Tokyo night at Millennials",
+    stayUrl: "https://www.hostelworld.com/hostels/p/285601/the-millennials-shibuya/",
+    stayUsdMin: 38,
+    stayUsdMax: 57,
+    stayCostNote: "Millennials dorm",
+    book: ["teamLab Planets timed ticket"],
+    actionKind: "book",
+  },
+  {
+    id: "aug31",
+    date: "Aug 31",
+    weekday: "Mon",
+    city: "osaka",
+    title: "Tokyo → Osaka",
+    image:
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Dotonbori_Canal_1.jpg?width=900",
+    imageAlt: "Dotonbori",
+    location: "Shinkansen → Namba / Dotonbori",
+    activities: [
+      {
+        name: "Nozomi Shinkansen Tokyo → Shin-Osaka",
+        cost: "~¥14,000 (~$89)",
+        blurb: "Fastest bullet train ~2.5h. Reserve seats if traveling with big bags.",
+        url: "https://www.japan-guide.com/e/e2018.html",
+      },
+      {
+        name: "Metro to Shinsaibashi",
+        cost: "¥230 (~$1.50)",
+        blurb: "Midosuji Line from Shin-Osaka straight into Minami.",
+        url: "https://www.japan-guide.com/e/e2157.html",
+      },
+      {
+        name: "Dotonbori street food crawl",
+        cost: "¥3–6k (~$19–38)",
+        blurb: "Neon canal strip — takoyaki, kushikatsu, Glico sign. Touristy and worth one night.",
+        url: "https://www.japan-guide.com/e/e4015.html",
+      },
+      {
+        name: "Gaming bar + karaoke",
+        cost: "¥3–6k (~$19–38)",
+        blurb: "Space Station-style retro gaming bars + karaoke boxes until late.",
+        url: "https://www.japan-guide.com/e/e2369.html",
+      },
+    ],
+    stay: "iloha hostel Namba Shinsaibashi",
+    stayDetail: "~3 min / 270m to Shinsaibashi Station · ~¥4–7k (~$25–44) · Alt: White Hostel Shinsaibashi",
+    stayUrl: "https://www.agoda.com/iloha-hostel-namba-shinsaibashi/hotel/osaka-jp.html",
+    stayUsdMin: 25,
+    stayUsdMax: 44,
+    stayCostNote: "iloha dorm",
+    book: ["Osaka hostel Aug 31–Sept 2", "Optional reserved Shinkansen seats"],
+    actionKind: "book",
+  },
+  {
+    id: "sep1",
+    date: "Sept 1",
+    weekday: "Tue",
+    city: "osaka",
+    title: "Full Osaka",
+    image:
+      "https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Osaka neon food",
+    location: "Kuromon → Amerikamura → Shinsekai",
+    activities: [
+      {
+        name: "Kuromon Market snacks",
+        cost: "¥1–3k (~$6–19)",
+        blurb: "Osaka’s kitchen — grilled seafood skewers and fruit for breakfast/lunch.",
+        url: "https://www.japan-guide.com/e/e4027.html",
+      },
+      {
+        name: "Amerikamura wander",
+        cost: "Free–cheap",
+        blurb: "Youth/streetwear district west of Shinsaibashi — cafes, thrift, people-watching.",
+        url: "https://www.japan-guide.com/e/e4014.html",
+      },
+      {
+        name: "Shinsekai / Tsutenkaku area",
+        cost: "Tower ~¥900 (~$6)",
+        blurb: "Retro neighborhood + tower views; classic kushikatsu dens nearby.",
+        url: "https://www.japan-guide.com/e/e4026.html",
+      },
+      {
+        name: "Okonomiyaki or wagyu dinner",
+        cost: "¥4–15k (~$25–95)",
+        blurb: "Osaka’s signature savory pancake — or splash on wagyu. Book the nice one.",
+        url: "https://www.japan-guide.com/e/e2346.html",
+      },
+      {
+        name: "Lighter bar night",
+        cost: "¥2–4k (~$13–25)",
+        blurb: "Second Minami night — go easier; Kyoto transfer tomorrow.",
+        url: "https://www.japan-guide.com/e/e4015.html",
+      },
+    ],
+    stay: "iloha hostel Namba Shinsaibashi",
+    stayDetail: "Same Osaka hostel",
+    stayUrl: "https://www.agoda.com/iloha-hostel-namba-shinsaibashi/hotel/osaka-jp.html",
+    stayUsdMin: 25,
+    stayUsdMax: 44,
+    stayCostNote: "iloha dorm",
+    book: ["Osaka dinner reservation"],
+    actionKind: "book",
+  },
+  {
+    id: "sep2",
+    date: "Sept 2",
+    weekday: "Wed",
+    city: "kyoto",
+    title: "Osaka → Ritz Kyoto",
+    image:
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Kyoto",
+    location: "Central Kyoto — Nishiki / Pontocho",
+    activities: [
+      {
+        name: "JR Osaka → Kyoto",
+        cost: "¥560–1,500 (~$4–10)",
+        blurb: "Short hop — Special Rapid ~15–30 min depending on station.",
+        url: "https://www.japan-guide.com/e/e2359_004.html",
+      },
+      {
+        name: "Taxi/bus to Ritz",
+        cost: "¥1–2k (~$6–13)",
+        blurb: "Ritz-Carlton sits on the Kamo River near central sightseeing.",
+        url: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+      },
+      {
+        name: "Nishiki Market graze",
+        cost: "¥2–4k (~$13–25)",
+        blurb: "Kyoto’s pantry street — pickles, skewers, sweets; lunch of many small things.",
+        url: "https://www.japan-guide.com/e/e3928.html",
+      },
+      {
+        name: "Pontocho dinner",
+        cost: "¥8–15k (~$50–95)",
+        blurb: "Lantern alley by the river; book riverside/kawadoko if available.",
+        url: "https://www.japan-guide.com/e/e3951.html",
+      },
+      {
+        name: "Kiyamachi drinks",
+        cost: "¥3–6k (~$19–38)",
+        blurb: "Parallel nightlife street — bars and karaoke, not mega-clubs.",
+        url: "https://www.japan-guide.com/e/e3951.html",
+      },
+    ],
+    stay: "The Ritz-Carlton, Kyoto",
+    stayDetail: "Confirmed · Sept 2–7 · finish points/NUA booking",
+    stayUrl: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "Ritz on points — $0 cash",
+    book: ["Ritz Kyoto points stay", "Pontocho dinner (TableCheck)"],
+    actionKind: "book",
+  },
+  {
+    id: "sep3",
+    date: "Sept 3",
+    weekday: "Thu",
+    city: "kyoto",
+    title: "Kiyomizu → Gion",
+    image:
+      "https://images.unsplash.com/photo-1478436127897-764b39ea4fe2?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Kyoto temples",
+    location: "East Kyoto / Higashiyama",
+    activities: [
+      {
+        name: "Taxi up to Kiyomizu",
+        cost: "¥1–2k (~$6–13)",
+        blurb: "Skip the uphill walk in heat — taxi up, stroll down the slopes.",
+        url: "https://www.japan-guide.com/e/e3903.html",
+      },
+      {
+        name: "Kiyomizu-dera",
+        cost: "¥500 (~$3)",
+        blurb: "Hillside wooden temple with city views; go early for fewer crowds.",
+        url: "https://www.kiyomizudera.or.jp/en/",
+      },
+      {
+        name: "Sannenzaka + Gion walk",
+        cost: "Free",
+        blurb: "Stone streets down to Yasaka/Gion. Stay on public streets — private alleys have fines.",
+        url: "https://www.japan-guide.com/e/e3902.html",
+      },
+      {
+        name: "Casual dinner",
+        cost: "¥2–5k (~$13–32)",
+        blurb: "Near Gion or Kawaramachi — no need for another big reservation.",
+      },
+      {
+        name: "Soft Kiyamachi drinks",
+        cost: "¥2–4k (~$13–25)",
+        blurb: "Easy night — Fushimi Inari wants an early start tomorrow.",
+        url: "https://www.japan-guide.com/e/e3951.html",
+      },
+    ],
+    stay: "The Ritz-Carlton, Kyoto",
+    stayDetail: "Same",
+    stayUrl: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "Ritz on points — $0 cash",
+    book: [],
+    actionKind: "none",
+  },
+  {
+    id: "sep4",
+    date: "Sept 4",
+    weekday: "Fri",
+    city: "kyoto",
+    title: "Fushimi Inari",
+    image:
+      "https://commons.wikimedia.org/wiki/Special:FilePath/Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg?width=900",
+    imageAlt: "Fushimi Inari",
+    location: "South Kyoto — Inari / Fushimi",
+    activities: [
+      {
+        name: "JR to Inari",
+        cost: "¥150–250 (~$1–2)",
+        blurb: "JR Nara Line to Inari Station — right at the shrine gate.",
+        url: "https://www.japan-guide.com/e/e3915.html",
+      },
+      {
+        name: "Fushimi Inari hike",
+        cost: "Free",
+        blurb: "Thousands of torii gates up the mountain. First stretch is the money shot.",
+        url: "https://inari.jp/en/",
+      },
+      {
+        name: "Optional sake tasting",
+        cost: "¥1–3k (~$6–19)",
+        blurb: "Fushimi is Kyoto’s sake district — brewery tastings south of Inari.",
+        url: "https://www.japan-guide.com/e/e3961.html",
+      },
+      {
+        name: "Dinner + karaoke night",
+        cost: "¥5–10k (~$32–63)",
+        blurb: "Bigger Kyoto night on Kiyamachi + a karaoke box near Kawaramachi.",
+        url: "https://www.japan-guide.com/e/e2369.html",
+      },
+    ],
+    stay: "The Ritz-Carlton, Kyoto",
+    stayDetail: "Same",
+    stayUrl: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "Ritz on points — $0 cash",
+    book: [],
+    actionKind: "none",
+  },
+  {
+    id: "sep5",
+    date: "Sept 5",
+    weekday: "Sat",
+    city: "kyoto",
+    title: "Arashiyama + nice dinner",
+    image:
+      "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Bamboo grove",
+    location: "West Kyoto — Arashiyama",
+    activities: [
+      {
+        name: "Train to Arashiyama",
+        cost: "¥240–400 (~$2–3)",
+        blurb: "JR Sagano or Hankyu to western Kyoto — dedicate the whole half-day here.",
+        url: "https://www.japan-guide.com/e/e3910.html",
+      },
+      {
+        name: "Bamboo Grove",
+        cost: "Free",
+        blurb: "Iconic bamboo path; go at open before tour groups pack it.",
+        url: "https://www.japan-guide.com/e/e3910.html",
+      },
+      {
+        name: "Tenryu-ji garden",
+        cost: "¥500 (~$3)",
+        blurb: "Zen temple garden next to the bamboo — one of Kyoto’s best landscapes.",
+        url: "https://www.tenryuji.com/en/",
+      },
+      {
+        name: "Optional monkey park",
+        cost: "¥600 (~$4)",
+        blurb: "Iwatayama — hike up for monkeys + city viewpoint.",
+        url: "https://www.japan-guide.com/e/e3941.html",
+      },
+      {
+        name: "Ritz / kaiseki dinner",
+        cost: "¥15–30k (~$95–190)",
+        blurb: "The trip’s Kyoto splurge — ask the Ritz concierge to book.",
+        url: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+      },
+    ],
+    stay: "The Ritz-Carlton, Kyoto",
+    stayDetail: "Same",
+    stayUrl: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "Ritz on points — $0 cash",
+    book: ["Concierge dinner for tonight"],
+    actionKind: "book",
+  },
+  {
+    id: "sep6",
+    date: "Sept 6",
+    weekday: "Sun",
+    city: "kyoto",
+    title: "Flex day",
+    image:
+      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Temple",
+    location: "North Kyoto · Nara · or hotel",
+    activities: [
+      {
+        name: "A) Kinkaku-ji",
+        cost: "¥500 (~$3) + taxi",
+        blurb: "Golden Pavilion in north Kyoto — taxi between north temples beats the bus.",
+        url: "https://www.shokoku-ji.jp/en/kinkakuji/",
+      },
+      {
+        name: "B) Nara day trip",
+        cost: "~¥1,500+¥800 (~$15 total)",
+        excludeFromTotal: true,
+        blurb: "JR to Nara — Todai-ji Great Buddha + deer park. Easy day trip.",
+        url: "https://www.japan-guide.com/e/e4103.html",
+      },
+      {
+        name: "C) Hotel recovery",
+        cost: "Free",
+        excludeFromTotal: true,
+        blurb: "Sleep, spa, Teramachi wander — valid after a hard week.",
+      },
+      {
+        name: "Last Kyoto dinner + drinks",
+        cost: "¥5–10k (~$32–63)",
+        blurb: "Casual send-off on Pontocho/Kiyamachi; pack for Seoul before drinks.",
+        url: "https://www.japan-guide.com/e/e3951.html",
+      },
+    ],
+    stay: "The Ritz-Carlton, Kyoto",
+    stayDetail: "Last Kyoto night",
+    stayUrl: "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "Ritz on points — $0 cash",
+    book: ["Confirm tomorrow’s KIX/ITM flight time"],
+    actionKind: "prep",
+  },
+  {
+    id: "sep7",
+    date: "Sept 7",
+    weekday: "Mon",
+    city: "seoul",
+    title: "Kyoto → Seoul",
+    image:
+      "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Seoul",
+    location: "KIX/ITM → ICN → Hongdae",
+    activities: [
+      {
+        name: "Haruka/train to airport",
+        cost: "¥3–4k (~$19–25)",
+        blurb: "JR Haruka to KIX is the simple reserved-seat option from Kyoto.",
+        url: "https://www.japan-guide.com/e/e2359_004.html",
+      },
+      {
+        name: "Flight to ICN",
+        cost: "TBD (book)",
+        excludeFromTotal: true,
+        blurb: "Still need to book Kyoto/Osaka → Seoul for Sept 7.",
+        url: "https://www.google.com/travel/flights",
+      },
+      {
+        name: "AREX to Hongik Univ",
+        cost: "₩10–20k (~$7–14)",
+        blurb: "Airport Railroad Express stops at Hongik Univ — perfect for Hongdae hostels.",
+        url: "https://www.arex.or.kr/eng/",
+      },
+      {
+        name: "Korean BBQ + soju",
+        cost: "₩40–80k (~$28–57)",
+        blurb: "Grill your own pork/beef, wrap in lettuce. Mapo/Hongdae are packed with options.",
+        url: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=136487",
+      },
+    ],
+    stay: "Time Travelers Party Hostel Hongdae",
+    stayDetail: "~5 min Hongik Univ Station (Line 2 + AREX) · ~₩30–45k (~$21–32) · Alt: Zzzip (quieter, Hapjeong)",
+    stayUrl: "https://www.hostelworld.com/hostels/p/99448/time-travelers-party-hostel-in-hongdae/",
+    stayUsdMin: 21,
+    stayUsdMax: 32,
+    stayCostNote: "Time Travelers dorm",
+    book: ["Flight KIX/ITM → ICN", "Hongdae hostel Sept 7–10"],
+    actionKind: "book",
+  },
+  {
+    id: "sep8",
+    date: "Sept 8",
+    weekday: "Tue",
+    city: "seoul",
+    title: "Palace day · Hongdae night",
+    image:
+      "https://images.unsplash.com/photo-1534274867514-d5b47ef89ed7?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Palace",
+    location: "Gyeongbokgung → Gwangjang → Hongdae",
+    activities: [
+      {
+        name: "Metro to palace",
+        cost: "₩1,500 (~$1)",
+        blurb: "Line 3 to Gyeongbokgung Station; T-money taps everywhere.",
+        url: "https://www.seoulmetro.co.kr/eng/",
+      },
+      {
+        name: "Gyeongbokgung",
+        cost: "₩3,000 (~$2)",
+        blurb: "Main Joseon palace — catch the guard ceremony if timing works.",
+        url: "https://www.royalpalace.go.kr:8300/cms/content/view.do?contentId=1001",
+      },
+      {
+        name: "Bukchon / Ikseon / Gwangjang",
+        cost: "₩10–20k (~$7–14) food",
+        blurb: "Hanok village exteriors → cafe alleys → market snacks (bindaetteok, gimbap).",
+        url: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=625585",
+      },
+      {
+        name: "Noraebang 1–2h",
+        cost: "₩15–30k (~$11–21) / room",
+        blurb: "Private Korean karaoke room — Hongdae has the highest density.",
+        url: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=625593",
+      },
+      {
+        name: "Bars / club",
+        cost: "₩20–40k (~$14–28)",
+        blurb: "Hongdae nightlife starts late; clubs often empty before 11pm.",
+        url: "https://english.visitkorea.or.kr/svc/whereToGo/festivalsContents.do?menuSn=611",
+      },
+    ],
+    stay: "Time Travelers Party Hostel Hongdae",
+    stayDetail: "Same",
+    stayUrl: "https://www.hostelworld.com/hostels/p/99448/time-travelers-party-hostel-in-hongdae/",
+    stayUsdMin: 21,
+    stayUsdMax: 32,
+    stayCostNote: "Time Travelers dorm",
+    book: [],
+    actionKind: "none",
+  },
+  {
+    id: "sep9",
+    date: "Sept 9",
+    weekday: "Wed",
+    city: "seoul",
+    title: "Peak Seoul night",
+    image:
+      "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Seoul night",
+    location: "Seongsu or COEX · Hongdae night",
+    activities: [
+      {
+        name: "Seongsu cafes or COEX library",
+        cost: "Café ₩8–15k (~$6–11) / COEX free",
+        blurb: "Pick one cluster: trendy Seongsu or Gangnam’s Starfield Library at COEX.",
+        url: "https://www.starfield.co.kr/coexmall/library",
+      },
+      {
+        name: "Chi-maek or BBQ",
+        cost: "₩25–60k (~$18–43)",
+        blurb: "Fried chicken + beer (chi-maek) — classic pre-club fuel.",
+        url: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=625592",
+      },
+      {
+        name: "Hongdae finale",
+        cost: "₩20–40k (~$14–28)",
+        blurb: "Last big night — bars, noraebang, club send-off.",
+        url: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=1951628",
+      },
+      {
+        name: "Optional jjimjilbang overnight",
+        cost: "₩10–15k (~$7–11)",
+        blurb: "24h bathhouse/sauna — sleep in common room. Peak young-Korea move.",
+        url: "https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=625594",
+      },
+    ],
+    stay: "Time Travelers · or jjimjilbang overnight",
+    stayDetail: "Pack before going out if flying tomorrow",
+    stayUsdMin: 7,
+    stayUsdMax: 32,
+    stayCostNote: "Hostel or jjimjilbang",
+    book: [],
+    actionKind: "prep",
+  },
+  {
+    id: "sep10",
+    date: "Sept 10",
+    weekday: "Thu",
+    city: "tokyo",
+    title: "Seoul → Haneda staging",
+    image:
+      "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Airport hotel area",
+    location: "ICN → HND → Anamori-Inari",
+    activities: [
+      {
+        name: "AREX to ICN",
+        cost: "₩10–20k (~$7–14)",
+        blurb: "From Hongik Univ Station straight to Incheon Airport.",
+        url: "https://www.arex.or.kr/eng/",
+      },
+      {
+        name: "Flight ICN → HND",
+        cost: "TBD (book)",
+        excludeFromTotal: true,
+        blurb: "Prefer Haneda over Narita for Clay’s early NH102 next morning.",
+        url: "https://www.google.com/travel/flights",
+      },
+      {
+        name: "Keikyu to Anamori-Inari",
+        cost: "¥300–500 (~$2–3)",
+        blurb: "One stop vibe from HND — walk to plat hostel keikyu.",
+        url: "https://plat-hostel-keikyu.com/en/hostel/haneda-home/index_11.html",
+      },
+      {
+        name: "Simple dinner near hostel",
+        cost: "¥1–3k (~$6–19)",
+        blurb: "Konbini or nearby shop — early sleep for the 10:20 flight.",
+        url: "https://www.japan-guide.com/e/e2012.html",
+      },
+    ],
+    stay: "plat hostel keikyu haneda home",
+    stayDetail: "7 min Anamori-Inari · ~10 min to HND · ~¥4–7k (~$25–44) · Alt: Villa Fontaine T3 hotel",
+    stayUrl: "https://plat-hostel-keikyu.com/en/hostel/haneda-home/index_11.html",
+    stayUsdMin: 25,
+    stayUsdMax: 44,
+    stayCostNote: "plat hostel Haneda",
+    book: ["Flight ICN → HND", "plat hostel Haneda Sept 10"],
+    actionKind: "book",
+  },
+  {
+    id: "sep11",
+    date: "Sept 11",
+    weekday: "Fri",
+    city: "travel",
+    title: "Fly home",
+    image:
+      "https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Plane window",
+    location: "HND (Clay) · NRT (Tom)",
+    activities: [
+      {
+        name: "Clay NH102 HND 10:20 → IAD",
+        cost: "Booked",
+        excludeFromTotal: true,
+        blurb: "Leave hostel early; HND Terminal check-in for ANA/United codeshare.",
+        url: "https://www.haneda-airport.jp/en/",
+      },
+      {
+        name: "Tom UA78 NRT 17:25 → EWR",
+        cost: "Booked",
+        excludeFromTotal: true,
+        blurb: "Transfer to Narita with buffer — Keikyu + JR or limousine bus.",
+        url: "https://www.narita-airport.jp/en/",
+      },
+    ],
+    stay: "Home",
+    stayDetail: "Tom: Keikyu/JR to NRT with buffer",
+    stayUsdMin: 0,
+    stayUsdMax: 0,
+    stayCostNote: "Home",
+    book: [],
+    actionKind: "prep",
+  },
+];
+
+
+</script>
+  <script>
+    // Simple shared password (unlisted URL + password). Change SITE_PASSWORD if you want.
+    const SITE_PASSWORD = "claytom2026";
+    const AUTH_KEY = "asia-trip-2026-auth";
+
+    function parseUsdRange(cost) {
+      const c = String(cost).trim();
+      if (/^(already booked|booked|tbd)\b/i.test(c)) return null;
+      if (/^free\b/i.test(c) && !c.includes("$")) return { min: 0, max: 0 };
+      const paren = c.match(/\(~?\$([0-9]+(?:\.[0-9]+)?)\+?(?:\s*[–—-]\s*\$?([0-9]+(?:\.[0-9]+)?))?\+?\)/);
+      if (paren) {
+        const min = parseFloat(paren[1]);
+        const max = paren[2] ? parseFloat(paren[2]) : /\+/.test(paren[0]) ? min * 1.15 : min;
+        return { min, max };
+      }
+      const bare = c.match(/^~?\$([0-9]+(?:\.[0-9]+)?)\+?(?:\s*[–—-]\s*\$?([0-9]+(?:\.[0-9]+)?))?/);
+      if (bare) {
+        const min = parseFloat(bare[1]);
+        const max = bare[2] ? parseFloat(bare[2]) : min;
+        return { min, max };
+      }
+      return null;
+    }
+
+    function dayTotalUsd(day) {
+      let min = day.stayUsdMin ?? 0;
+      let max = day.stayUsdMax ?? 0;
+      const skipped = [];
+      for (const a of day.activities) {
+        if (a.excludeFromTotal) { skipped.push(a.name); continue; }
+        const range = parseUsdRange(a.cost);
+        if (!range) { skipped.push(a.name); continue; }
+        min += range.min;
+        max += range.max;
+      }
+      return { min, max, skipped };
+    }
+
+    function formatUsdRange(min, max) {
+      const fmt = (n) => `$${Math.round(n)}`;
+      if (Math.abs(min - max) < 0.5) return fmt(min);
+      return `${fmt(min)}–${fmt(max)}`;
+    }
+
+    function cityLabel(city) {
+      return ({ tokyo: "Tokyo", osaka: "Osaka", kyoto: "Kyoto", seoul: "Seoul", travel: "Travel" })[city] || city;
+    }
+
+    function actionLabel(kind) {
+      return ({ book: "BOOK", prep: "PREP", none: "NO BOOKING" })[kind] || kind;
+    }
+
+    function tipHtml(blurb) {
+      return `<span class="tip">
+        <button type="button" class="tip-btn" aria-label="More info">?</button>
+        <span class="bubble">${escapeHtml(blurb)}</span>
+      </span>`;
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function activityRow(a) {
+      const name = a.url
+        ? `<a href="${a.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(a.name)}</a>`
+        : escapeHtml(a.name);
+      return `<div class="activity">
+        <div>
+          <div class="tip">
+            ${name}
+            ${tipHtml(a.blurb)}
+          </div>
+        </div>
+        <div class="cost">${escapeHtml(a.cost)}</div>
+      </div>`;
+    }
+
+    function dayCard(day, { compact = false } = {}) {
+      const total = dayTotalUsd(day);
+      const stayName = day.stayUrl
+        ? `<a href="${day.stayUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(day.stay)}</a>`
+        : escapeHtml(day.stay);
+      const books = day.book.length
+        ? day.book.map((b) => `<div>• ${escapeHtml(b)}</div>`).join("")
+        : `<div>Nothing — show up.</div>`;
+
+      return `<article class="card" data-day="${day.id}">
+        <div class="card-head">
+          <h2>${escapeHtml(day.weekday)} ${escapeHtml(day.date)} — ${escapeHtml(day.title)}</h2>
+          <div class="badges">
+            <span class="badge ${day.city}">${cityLabel(day.city)}</span>
+            <span class="badge ${day.actionKind}">${actionLabel(day.actionKind)}</span>
+          </div>
+        </div>
+        ${compact ? "" : `<img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />`}
+        <div class="card-body">
+          <div class="total">
+            <strong>Day total · ${formatUsdRange(total.min, total.max)} / person</strong>
+            <div class="stay-detail">Includes stay${day.stayCostNote ? ` (${escapeHtml(day.stayCostNote)})` : ""}. Excludes booked/TBD flights.</div>
+          </div>
+          <div>
+            <div class="section-label">Location</div>
+            <div>${escapeHtml(day.location)}</div>
+          </div>
+          <div>
+            <div class="section-label">Activities + cost</div>
+            ${day.activities.map(activityRow).join("")}
+          </div>
+          <div>
+            <div class="section-label">Staying tonight</div>
+            <div><strong>${stayName}</strong></div>
+            <div class="stay-detail">${escapeHtml(day.stayDetail)}</div>
+          </div>
+          <div>
+            <div class="section-label">Things to book</div>
+            <div class="book-list">${books}</div>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    let filter = "all";
+    let selectedId = "aug28";
+
+    function filteredDays() {
+      return window.DAYS.filter((d) => filter === "all" || d.city === filter);
+    }
+
+    function render() {
+      const days = window.DAYS;
+      const trip = days.reduce((acc, d) => {
+        const t = dayTotalUsd(d);
+        return { min: acc.min + t.min, max: acc.max + t.max };
+      }, { min: 0, max: 0 });
+
+      document.getElementById("stats").innerHTML = `
+        <div class="stat"><strong>${formatUsdRange(trip.min, trip.max)}</strong><span>Trip total / person</span></div>
+        <div class="stat"><strong>16</strong><span>Calendar days</span></div>
+        <div class="stat"><strong>Ritz pts</strong><span>Kyoto $0 cash</span></div>
+        <div class="stat"><strong>5 hostels</strong><span>Near metro picks</span></div>
+      `;
+
+      const cities = ["all", "tokyo", "osaka", "kyoto", "seoul", "travel"];
+      document.getElementById("filters").innerHTML = cities.map((c) =>
+        `<button type="button" data-filter="${c}" class="${filter === c ? "active" : ""}">${c === "all" ? "All" : cityLabel(c)}</button>`
+      ).join("");
+
+      const list = filteredDays();
+      document.getElementById("pills").innerHTML = list.map((d) => {
+        const t = dayTotalUsd(d);
+        return `<button type="button" class="pill ${selectedId === d.id ? "active" : ""} ${d.actionKind === "book" ? "book" : ""}" data-id="${d.id}">
+          ${escapeHtml(d.date)} · ${formatUsdRange(t.min, t.max)}
+        </button>`;
+      }).join("");
+
+      const selected = days.find((d) => d.id === selectedId) || days[1];
+      document.getElementById("focus").innerHTML = dayCard(selected);
+      document.getElementById("all").innerHTML = list.map((d) => dayCard(d, { compact: true })).join("");
+
+      // Tip toggle for mobile tap
+      document.querySelectorAll(".tip-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const tip = btn.closest(".tip");
+          const open = tip.classList.contains("open");
+          document.querySelectorAll(".tip.open").forEach((t) => t.classList.remove("open"));
+          if (!open) tip.classList.add("open");
+        });
+      });
+    }
+
+    document.getElementById("filters").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-filter]");
+      if (!btn) return;
+      filter = btn.dataset.filter;
+      const list = filteredDays();
+      if (!list.some((d) => d.id === selectedId) && list[0]) selectedId = list[0].id;
+      render();
+    });
+
+    document.getElementById("pills").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-id]");
+      if (!btn) return;
+      selectedId = btn.dataset.id;
+      render();
+      document.getElementById("focus").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("prev").addEventListener("click", () => {
+      const i = window.DAYS.findIndex((d) => d.id === selectedId);
+      if (i > 0) { selectedId = window.DAYS[i - 1].id; filter = "all"; render(); }
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      const i = window.DAYS.findIndex((d) => d.id === selectedId);
+      if (i < window.DAYS.length - 1) { selectedId = window.DAYS[i + 1].id; filter = "all"; render(); }
+    });
+
+    function unlock() {
+      document.getElementById("gate").classList.add("hidden");
+      document.getElementById("app").classList.remove("hidden");
+      render();
+    }
+
+    document.getElementById("gate-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const val = document.getElementById("pw").value.trim();
+      if (val === SITE_PASSWORD) {
+        sessionStorage.setItem(AUTH_KEY, "1");
+        unlock();
+      } else {
+        document.getElementById("gate-error").textContent = "Wrong password.";
+      }
+    });
+
+    if (sessionStorage.getItem(AUTH_KEY) === "1") unlock();
+  </script>
+</body>
+</html>
