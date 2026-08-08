@@ -108,16 +108,54 @@
     .hero {
       width: 100%; height: 180px; object-fit: cover; display: block; background: #222;
     }
+    .map-wrap {
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      background: #1a1f2a;
+    }
     .map {
-      height: 280px; width: 100%; background: #1a1f2a; border-bottom: 1px solid var(--line);
+      height: 280px; width: 100%; background: #1a1f2a;
       z-index: 1;
     }
+    .map-tour {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--panel2);
+      border-top: 1px solid var(--line);
+    }
+    .map-tour button {
+      border: 1px solid var(--line); background: var(--panel); color: var(--text);
+      width: 36px; height: 36px; border-radius: 8px; font-size: 1.1rem;
+      cursor: pointer; line-height: 1; flex: 0 0 auto;
+    }
+    .map-tour button:disabled {
+      opacity: 0.35; cursor: default;
+    }
+    .map-tour button:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
+    .map-tour-label {
+      flex: 1; min-width: 0;
+      font-size: 0.88rem; line-height: 1.3;
+    }
+    .map-tour-label strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .map-tour-label span { color: var(--muted); font-size: 0.78rem; }
     .leaflet-container { font: inherit; }
     .num-marker {
       background: var(--accent); color: #081018; border: 2px solid #fff;
       border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center;
       justify-content: center; font-weight: 800; font-size: 13px;
       box-shadow: 0 2px 8px rgba(0,0,0,.4);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .num-marker.active {
+      background: #ffd166; transform: scale(1.2);
+      box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.45), 0 2px 8px rgba(0,0,0,.4);
+    }
+    .route-arrow {
+      width: 0; height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 14px solid #6ea8fe;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));
     }
 
     .card-body { padding: 16px; display: grid; gap: 14px; }
@@ -216,8 +254,8 @@
       <h2 style="margin-top:28px">All days</h2>
       <div class="grid-all" id="all"></div>
       <footer>
-        Numbers on the map match activity numbers. Travel times are door-to-door estimates.
-        Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
+        Numbers on the map match activity numbers. Use ◀ ▶ under each map to step through stops.
+        Travel times are door-to-door estimates. Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
       </footer>
     </div>
   </div>
@@ -227,7 +265,6 @@
   <script>
     const SITE_PASSWORD = "claytom2026";
     const AUTH_KEY = "asia-trip-2026-auth";
-    const maps = new Map();
 
     function parseUsdRange(cost) {
       const c = String(cost).trim();
@@ -329,7 +366,17 @@
           </div>
         </div>
         ${compact ? "" : `<img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />`}
-        <div class="map" id="${mapId}" data-day-id="${day.id}"></div>
+        <div class="map-wrap">
+          <div class="map" id="${mapId}" data-day-id="${day.id}"></div>
+          <div class="map-tour" data-map-id="${mapId}">
+            <button type="button" class="map-prev" aria-label="Previous activity">◀</button>
+            <div class="map-tour-label">
+              <strong class="map-step-title">Loading map…</strong>
+              <span class="map-step-meta"></span>
+            </div>
+            <button type="button" class="map-next" aria-label="Next activity">▶</button>
+          </div>
+        </div>
         <div class="card-body">
           <div class="total">
             <strong>Day total · ${formatUsdRange(total.min, total.max)} / person</strong>
@@ -356,9 +403,54 @@
       </article>`;
     }
 
+    const maps = new Map();
+    const mapTours = new Map();
+
+    function bearingDeg(a, b) {
+      const toRad = Math.PI / 180;
+      const lat1 = a[0] * toRad, lat2 = b[0] * toRad;
+      const dLng = (b[1] - a[1]) * toRad;
+      const y = Math.sin(dLng) * Math.cos(lat2);
+      const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+      return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+    }
+
+    function midpoint(a, b) {
+      return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    }
+
     function destroyMaps() {
       maps.forEach((m) => m.remove());
       maps.clear();
+      mapTours.clear();
+    }
+
+    function setMapStep(mapId, index) {
+      const tour = mapTours.get(mapId);
+      if (!tour) return;
+      const i = Math.max(0, Math.min(index, tour.pts.length - 1));
+      tour.index = i;
+      const a = tour.pts[i];
+      const n = tour.nums[i];
+
+      tour.markers.forEach((m, mi) => {
+        const el = m.getElement()?.querySelector(".num-marker");
+        if (el) el.classList.toggle("active", mi === i);
+      });
+
+      const label = document.querySelector(`.map-tour[data-map-id="${mapId}"]`);
+      if (label) {
+        label.querySelector(".map-step-title").textContent = `${n}. ${a.name}`;
+        const travel = a.travelFromPrev
+          ? `${modeLabel(a.travelFromPrev.mode)} ~${a.travelFromPrev.min} min from previous`
+          : (i === 0 ? "Start of the day" : "");
+        label.querySelector(".map-step-meta").textContent = `${i + 1} / ${tour.pts.length}${travel ? " · " + travel : ""}`;
+        label.querySelector(".map-prev").disabled = i <= 0;
+        label.querySelector(".map-next").disabled = i >= tour.pts.length - 1;
+      }
+
+      tour.map.flyTo([a.lat, a.lng], Math.max(tour.map.getZoom(), 13), { duration: 0.45 });
+      tour.markers[i].openPopup();
     }
 
     function initMaps() {
@@ -366,8 +458,15 @@
         const day = window.DAYS.find((d) => d.id === el.dataset.dayId);
         if (!day) return;
         const pts = day.activities.filter((a) => a.lat != null && a.lng != null);
+        const controls = document.querySelector(`.map-tour[data-map-id="${el.id}"]`);
         if (!pts.length) {
           el.innerHTML = `<div style="padding:16px;color:#9aa3b5">No map points for this day.</div>`;
+          if (controls) {
+            controls.querySelector(".map-step-title").textContent = "No map points";
+            controls.querySelector(".map-step-meta").textContent = "";
+            controls.querySelector(".map-prev").disabled = true;
+            controls.querySelector(".map-next").disabled = true;
+          }
           return;
         }
         const map = L.map(el, { scrollWheelZoom: false, attributionControl: true });
@@ -376,9 +475,40 @@
           attribution: "&copy; OpenStreetMap",
         }).addTo(map);
 
-        const latlngs = [];
+        const latlngs = pts.map((a) => [a.lat, a.lng]);
+        const nums = pts.map((a) => day.activities.indexOf(a) + 1);
+        const markers = [];
+
+        // Route line + directional arrows between stops
+        if (latlngs.length > 1) {
+          L.polyline(latlngs, {
+            color: "#6ea8fe",
+            weight: 4,
+            opacity: 0.9,
+          }).addTo(map);
+
+          for (let i = 0; i < latlngs.length - 1; i++) {
+            const a = latlngs[i], b = latlngs[i + 1];
+            // skip tiny hops that would stack arrows
+            const dist = map.distance(a, b);
+            if (dist < 80) continue;
+            const mid = midpoint(a, b);
+            const deg = bearingDeg(a, b);
+            const arrow = L.marker(mid, {
+              interactive: false,
+              keyboard: false,
+              icon: L.divIcon({
+                className: "",
+                html: `<div class="route-arrow" style="transform: rotate(${deg}deg)"></div>`,
+                iconSize: [14, 14],
+                iconAnchor: [7, 7],
+              }),
+            }).addTo(map);
+          }
+        }
+
         pts.forEach((a, i) => {
-          const n = day.activities.indexOf(a) + 1;
+          const n = nums[i];
           const icon = L.divIcon({
             className: "",
             html: `<div class="num-marker">${n}</div>`,
@@ -387,14 +517,19 @@
           });
           const marker = L.marker([a.lat, a.lng], { icon }).addTo(map);
           marker.bindPopup(`<strong>${n}. ${escapeHtml(a.name)}</strong><br>${escapeHtml(a.blurb)}`);
-          latlngs.push([a.lat, a.lng]);
+          marker.on("click", () => setMapStep(el.id, i));
+          markers.push(marker);
         });
 
-        if (latlngs.length > 1) {
-          L.polyline(latlngs, { color: "#6ea8fe", weight: 3, opacity: 0.85, dashArray: "6 8" }).addTo(map);
-        }
-        map.fitBounds(latlngs, { padding: [28, 28], maxZoom: 14 });
+        map.fitBounds(latlngs, { padding: [36, 36], maxZoom: 14 });
         maps.set(el.id, map);
+        mapTours.set(el.id, { map, pts, markers, nums, index: 0 });
+
+        if (controls) {
+          controls.querySelector(".map-prev").onclick = () => setMapStep(el.id, mapTours.get(el.id).index - 1);
+          controls.querySelector(".map-next").onclick = () => setMapStep(el.id, mapTours.get(el.id).index + 1);
+        }
+        setMapStep(el.id, 0);
         setTimeout(() => map.invalidateSize(), 50);
       });
     }
