@@ -238,6 +238,181 @@
     .grid-all { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
     @media (min-width: 860px) { .grid-all { grid-template-columns: 1fr 1fr; } }
     footer { margin-top: 28px; color: var(--muted); font-size: 0.85rem; }
+
+    /* —— Trip timeline —— */
+    .timeline-panel {
+      margin: 18px 0 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 14px 16px;
+    }
+    .timeline-head {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      justify-content: space-between; margin-bottom: 12px;
+    }
+    .timeline-head h2 {
+      margin: 0; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700;
+    }
+    .timeline-styles {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .timeline-styles button {
+      border: 1px solid var(--line); background: var(--panel2); color: var(--text);
+      border-radius: 999px; padding: 6px 10px; font-size: 0.75rem; cursor: pointer;
+    }
+    .timeline-styles button.active {
+      background: var(--accent); color: #081018; border-color: transparent; font-weight: 700;
+    }
+    .timeline-note { color: var(--muted); font-size: 0.8rem; margin: 0 0 10px; }
+    .timeline-stage { overflow-x: auto; padding-bottom: 4px; }
+
+    /* 1 Spine */
+    .tl-spine { display: flex; align-items: flex-start; gap: 0; min-width: max-content; position: relative; padding: 8px 4px 0; }
+    .tl-spine::before {
+      content: ""; position: absolute; left: 18px; right: 18px; top: 22px; height: 2px; background: #3a455c;
+    }
+    .tl-spine .tl-day {
+      width: 56px; text-align: center; position: relative; cursor: pointer; padding-top: 2px;
+    }
+    .tl-spine .dot {
+      width: 14px; height: 14px; border-radius: 50%; margin: 0 auto 8px; border: 2px solid #fff;
+      position: relative; z-index: 1;
+    }
+    .tl-spine .tl-day.tokyo .dot { background: #5b8def; }
+    .tl-spine .tl-day.osaka .dot { background: #e0a84a; }
+    .tl-spine .tl-day.kyoto .dot { background: #4caf7a; }
+    .tl-spine .tl-day.seoul .dot { background: #b07cff; }
+    .tl-spine .tl-day.travel .dot { background: #8b95a8; }
+    .tl-spine .tl-day.active .dot { box-shadow: 0 0 0 3px rgba(110,168,254,.45); transform: scale(1.2); }
+    .tl-spine .d { font-size: 0.68rem; color: var(--muted); }
+    .tl-spine .c { font-size: 0.62rem; font-weight: 700; margin-top: 2px; }
+
+    /* 2 Segments */
+    .tl-segments { display: flex; gap: 4px; min-width: 640px; height: 64px; }
+    .tl-segments .seg {
+      flex: 1; border-radius: 10px; padding: 8px 10px; cursor: pointer; color: #0b0d12;
+      display: flex; flex-direction: column; justify-content: space-between; min-width: 0;
+      font-weight: 700; font-size: 0.78rem;
+    }
+    .tl-segments .seg span { font-weight: 500; font-size: 0.68rem; opacity: .85; }
+    .tl-segments .seg.tokyo { background: #6ea8fe; }
+    .tl-segments .seg.osaka { background: #e8b86a; }
+    .tl-segments .seg.kyoto { background: #6bcf95; }
+    .tl-segments .seg.seoul { background: #c39bff; }
+    .tl-segments .seg.travel { background: #9aa3b5; }
+    .tl-segments .seg.active { outline: 2px solid #fff; outline-offset: 2px; }
+
+    /* 3 Stations (metro) */
+    .tl-stations { display: flex; align-items: center; gap: 0; min-width: max-content; padding: 12px 8px; }
+    .tl-stations .stop { display: flex; align-items: center; }
+    .tl-stations .node {
+      width: 34px; height: 34px; border-radius: 50%; border: 3px solid currentColor; background: var(--bg);
+      display: grid; place-items: center; font-size: 0.65rem; font-weight: 800; cursor: pointer;
+    }
+    .tl-stations .rail { width: 28px; height: 4px; background: currentColor; opacity: .55; }
+    .tl-stations .stop.tokyo { color: #6ea8fe; }
+    .tl-stations .stop.osaka { color: #e8b86a; }
+    .tl-stations .stop.kyoto { color: #6bcf95; }
+    .tl-stations .stop.seoul { color: #c39bff; }
+    .tl-stations .stop.travel { color: #9aa3b5; }
+    .tl-stations .node.active { background: currentColor; color: #081018; }
+
+    /* 4 Stamps */
+    .tl-stamps { display: flex; gap: 8px; min-width: max-content; }
+    .tl-stamps .stamp {
+      width: 78px; height: 78px; border: 2px dashed #6a748a; border-radius: 8px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      cursor: pointer; transform: rotate(-3deg); background: #12151c;
+    }
+    .tl-stamps .stamp:nth-child(even) { transform: rotate(2deg); }
+    .tl-stamps .stamp .city { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+    .tl-stamps .stamp .date { font-size: 0.65rem; color: var(--muted); margin-top: 4px; }
+    .tl-stamps .stamp.tokyo { border-color: #6ea8fe; color: #6ea8fe; }
+    .tl-stamps .stamp.osaka { border-color: #e8b86a; color: #e8b86a; }
+    .tl-stamps .stamp.kyoto { border-color: #6bcf95; color: #6bcf95; }
+    .tl-stamps .stamp.seoul { border-color: #c39bff; color: #c39bff; }
+    .tl-stamps .stamp.travel { border-color: #9aa3b5; color: #9aa3b5; }
+    .tl-stamps .stamp.active { background: #1a2233; box-shadow: inset 0 0 0 1px currentColor; }
+
+    /* 5 Ruler */
+    .tl-ruler { min-width: 720px; }
+    .tl-ruler .bar {
+      height: 8px; border-radius: 999px; display: flex; overflow: hidden; margin-bottom: 8px;
+    }
+    .tl-ruler .bar i { display: block; height: 100%; }
+    .tl-ruler .bar i.tokyo { background: #6ea8fe; }
+    .tl-ruler .bar i.osaka { background: #e8b86a; }
+    .tl-ruler .bar i.kyoto { background: #6bcf95; }
+    .tl-ruler .bar i.seoul { background: #c39bff; }
+    .tl-ruler .bar i.travel { background: #9aa3b5; }
+    .tl-ruler .ticks { display: flex; }
+    .tl-ruler .tick {
+      flex: 1; text-align: center; font-size: 0.62rem; color: var(--muted); cursor: pointer;
+      border-left: 1px solid #2a3142; padding-top: 4px;
+    }
+    .tl-ruler .tick.active { color: var(--accent); font-weight: 700; }
+
+    /* 6 Chapters */
+    .tl-chapters { display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 8px; min-width: 640px; }
+    .tl-chapters .ch {
+      border-left: 3px solid; padding: 10px 12px; background: var(--panel2); cursor: pointer; border-radius: 0 8px 8px 0;
+    }
+    .tl-chapters .ch.tokyo { border-color: #6ea8fe; }
+    .tl-chapters .ch.osaka { border-color: #e8b86a; }
+    .tl-chapters .ch.kyoto { border-color: #6bcf95; }
+    .tl-chapters .ch.seoul { border-color: #c39bff; }
+    .tl-chapters .ch.travel { border-color: #9aa3b5; }
+    .tl-chapters .ch strong { display: block; font-size: 0.95rem; }
+    .tl-chapters .ch span { color: var(--muted); font-size: 0.75rem; }
+    .tl-chapters .ch.active { background: #243044; }
+
+    /* 7 Beads */
+    .tl-beads { display: flex; align-items: center; gap: 10px; min-width: max-content; padding: 8px 0; }
+    .tl-beads .bead {
+      width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; text-align: center;
+      cursor: pointer; color: #081018; font-weight: 800; font-size: 0.72rem; line-height: 1.2;
+    }
+    .tl-beads .bead small { display: block; font-weight: 600; font-size: 0.62rem; opacity: .8; }
+    .tl-beads .bead.tokyo { background: #6ea8fe; }
+    .tl-beads .bead.osaka { background: #e8b86a; }
+    .tl-beads .bead.kyoto { background: #6bcf95; }
+    .tl-beads .bead.seoul { background: #c39bff; }
+    .tl-beads .bead.travel { background: #9aa3b5; }
+    .tl-beads .link { width: 24px; height: 3px; background: #3a455c; }
+    .tl-beads .bead.active { outline: 3px solid #fff; }
+
+    /* 8 Tickets */
+    .tl-tickets { display: flex; gap: 8px; min-width: max-content; }
+    .tl-tickets .tix {
+      width: 110px; background: #f4f0e6; color: #1a1a1a; border-radius: 8px; overflow: hidden; cursor: pointer;
+      font-family: "Courier New", monospace;
+    }
+    .tl-tickets .tix .top { background: #222; color: #f4f0e6; padding: 6px 8px; font-size: 0.65rem; }
+    .tl-tickets .tix .body { padding: 8px; }
+    .tl-tickets .tix .body strong { display: block; font-size: 0.85rem; }
+    .tl-tickets .tix .body span { font-size: 0.65rem; }
+    .tl-tickets .tix.active { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* 9 Heat */
+    .tl-heat { display: grid; grid-template-columns: repeat(16, minmax(36px, 1fr)); gap: 4px; min-width: 640px; }
+    .tl-heat .cell {
+      aspect-ratio: 1; border-radius: 6px; cursor: pointer; display: grid; place-items: end start;
+      padding: 4px; font-size: 0.58rem; font-weight: 700; color: #081018;
+    }
+    .tl-heat .cell.tokyo { background: #6ea8fe; }
+    .tl-heat .cell.osaka { background: #e8b86a; }
+    .tl-heat .cell.kyoto { background: #6bcf95; }
+    .tl-heat .cell.seoul { background: #c39bff; }
+    .tl-heat .cell.travel { background: #9aa3b5; }
+    .tl-heat .cell.active { outline: 2px solid #fff; outline-offset: 1px; }
+
+    /* 10 Route SVG strip */
+    .tl-route { min-width: 720px; }
+    .tl-route svg { width: 100%; height: 90px; display: block; }
+    .tl-route .lbl { font-size: 10px; fill: #9aa3b5; }
+    .tl-route .city { font-size: 11px; font-weight: 700; fill: #e8eaef; }
   </style>
 </head>
 <body>
@@ -260,6 +435,14 @@
         <p>Clay & Tom · Tokyo → Osaka → Ritz Kyoto → Seoul · Aug 27 – Sept 11</p>
       </header>
       <div class="stats" id="stats"></div>
+      <section class="timeline-panel" id="timeline-panel">
+        <div class="timeline-head">
+          <h2>Full trip timeline</h2>
+          <div class="timeline-styles" id="timeline-styles"></div>
+        </div>
+        <p class="timeline-note" id="timeline-note"></p>
+        <div class="timeline-stage" id="timeline-stage"></div>
+      </section>
       <div class="banner">
         Book first: hostels + Ritz + KIX→ICN + ICN→HND. Yellow days need bookings — links are on each day.
       </div>
@@ -629,6 +812,150 @@
 
     let filter = "all";
     let selectedId = "aug28";
+    const TL_KEY = "asia-trip-2026-tl-style";
+    const TL_STYLES = [
+      { id: "spine", label: "1 · Spine", blurb: "Classic dotted line — every day is a stop on one continuous path." },
+      { id: "segments", label: "2 · Segments", blurb: "Proportional city blocks — see how long you stay in each place." },
+      { id: "stations", label: "3 · Metro", blurb: "Transit-map stations — good if you think in transfers." },
+      { id: "stamps", label: "4 · Stamps", blurb: "Passport stamps — playful, one mark per day." },
+      { id: "ruler", label: "5 · Ruler", blurb: "Minimal color ruler + date ticks — densest overview." },
+      { id: "chapters", label: "6 · Chapters", blurb: "Editorial city chapters — fewer clicks, city-first." },
+      { id: "beads", label: "7 · Beads", blurb: "City beads sized by night count — trip shape at a glance." },
+      { id: "tickets", label: "8 · Tickets", blurb: "Boarding-pass stubs — travel-day energy." },
+      { id: "heat", label: "9 · Heat", blurb: "Calendar heat cells — scan the whole 16 days like a strip." },
+      { id: "route", label: "10 · Route", blurb: "Single SVG route ribbon through cities." },
+    ];
+    let timelineStyle = localStorage.getItem(TL_KEY) || "spine";
+
+    function cityShort(city) {
+      return ({ tokyo: "TYO", osaka: "OSA", kyoto: "KYO", seoul: "SEL", travel: "FLY" })[city] || city;
+    }
+
+    function cityChapters(days) {
+      const out = [];
+      for (const d of days) {
+        const last = out[out.length - 1];
+        if (last && last.city === d.city) {
+          last.days.push(d);
+          last.end = d.date;
+        } else {
+          out.push({ city: d.city, start: d.date, end: d.date, days: [d], firstId: d.id });
+        }
+      }
+      return out;
+    }
+
+    function selectDayFromTimeline(id) {
+      selectedId = id;
+      filter = "all";
+      render();
+      document.getElementById("focus")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function renderTimeline() {
+      const days = window.DAYS;
+      const stylesEl = document.getElementById("timeline-styles");
+      const stage = document.getElementById("timeline-stage");
+      const note = document.getElementById("timeline-note");
+      if (!stylesEl || !stage) return;
+
+      stylesEl.innerHTML = TL_STYLES.map((s) =>
+        `<button type="button" data-tl="${s.id}" class="${timelineStyle === s.id ? "active" : ""}">${s.label}</button>`
+      ).join("");
+      note.textContent = (TL_STYLES.find((s) => s.id === timelineStyle) || TL_STYLES[0]).blurb;
+
+      const chapters = cityChapters(days);
+      let html = "";
+
+      if (timelineStyle === "spine") {
+        html = `<div class="tl-spine">${days.map((d) => `
+          <div class="tl-day ${d.city} ${selectedId === d.id ? "active" : ""}" data-id="${d.id}" title="${escapeHtml(d.title)}">
+            <div class="dot"></div>
+            <div class="d">${escapeHtml(d.date)}</div>
+            <div class="c">${cityShort(d.city)}</div>
+          </div>`).join("")}</div>`;
+      } else if (timelineStyle === "segments") {
+        html = `<div class="tl-segments">${chapters.map((ch) => `
+          <button type="button" class="seg ${ch.city} ${ch.days.some((d) => d.id === selectedId) ? "active" : ""}" data-id="${ch.firstId}" style="flex:${ch.days.length}">
+            ${cityLabel(ch.city).replace(/^[^\w]*/, "")}
+            <span>${ch.start}–${ch.end} · ${ch.days.length}d</span>
+          </button>`).join("")}</div>`;
+      } else if (timelineStyle === "stations") {
+        html = `<div class="tl-stations">${days.map((d, i) => `
+          <div class="stop ${d.city}">
+            ${i ? `<div class="rail"></div>` : ""}
+            <button type="button" class="node ${selectedId === d.id ? "active" : ""}" data-id="${d.id}" title="${escapeHtml(d.title)}">${i + 1}</button>
+          </div>`).join("")}</div>`;
+      } else if (timelineStyle === "stamps") {
+        html = `<div class="tl-stamps">${days.map((d) => `
+          <button type="button" class="stamp ${d.city} ${selectedId === d.id ? "active" : ""}" data-id="${d.id}">
+            <div class="city">${cityShort(d.city)}</div>
+            <div class="date">${escapeHtml(d.date)}</div>
+          </button>`).join("")}</div>`;
+      } else if (timelineStyle === "ruler") {
+        html = `<div class="tl-ruler">
+          <div class="bar">${days.map((d) => `<i class="${d.city}" style="flex:1"></i>`).join("")}</div>
+          <div class="ticks">${days.map((d) => `
+            <button type="button" class="tick ${selectedId === d.id ? "active" : ""}" data-id="${d.id}">${d.date.replace(/Aug |Sept /, "")}</button>
+          `).join("")}</div>
+        </div>`;
+      } else if (timelineStyle === "chapters") {
+        html = `<div class="tl-chapters">${chapters.map((ch) => `
+          <button type="button" class="ch ${ch.city} ${ch.days.some((d) => d.id === selectedId) ? "active" : ""}" data-id="${ch.firstId}">
+            <strong>${cityLabel(ch.city)}</strong>
+            <span>${ch.start} → ${ch.end}</span>
+            <span>${ch.days.length} day${ch.days.length > 1 ? "s" : ""}</span>
+          </button>`).join("")}</div>`;
+      } else if (timelineStyle === "beads") {
+        html = `<div class="tl-beads">${chapters.map((ch, i) => `
+          ${i ? `<div class="link"></div>` : ""}
+          <button type="button" class="bead ${ch.city} ${ch.days.some((d) => d.id === selectedId) ? "active" : ""}" data-id="${ch.firstId}">
+            ${cityShort(ch.city)}
+            <small>${ch.days.length}d</small>
+          </button>`).join("")}</div>`;
+      } else if (timelineStyle === "tickets") {
+        html = `<div class="tl-tickets">${days.map((d) => `
+          <button type="button" class="tix ${selectedId === d.id ? "active" : ""}" data-id="${d.id}">
+            <div class="top">${escapeHtml(d.weekday)} · ${cityShort(d.city)}</div>
+            <div class="body"><strong>${escapeHtml(d.date)}</strong><span>${escapeHtml(String(d.title).replace(/^[^\wA-Za-z]+/, "").slice(0, 22))}</span></div>
+          </button>`).join("")}</div>`;
+      } else if (timelineStyle === "heat") {
+        html = `<div class="tl-heat">${days.map((d) => `
+          <button type="button" class="cell ${d.city} ${selectedId === d.id ? "active" : ""}" data-id="${d.id}" title="${escapeHtml(d.title)}">${d.date.replace(/Aug |Sept /, "")}</button>
+        `).join("")}</div>`;
+      } else if (timelineStyle === "route") {
+        const w = 900, h = 90, pad = 40;
+        const xs = days.map((_, i) => pad + (i * (w - pad * 2)) / Math.max(days.length - 1, 1));
+        const ys = days.map((d) => ({ tokyo: 30, osaka: 45, kyoto: 55, seoul: 35, travel: 20 })[d.city] || 40);
+        const path = xs.map((x, i) => `${i ? "L" : "M"}${x},${ys[i]}`).join(" ");
+        html = `<div class="tl-route"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Trip route">
+          <path d="${path}" fill="none" stroke="#6ea8fe" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          ${days.map((d, i) => {
+            const colors = { tokyo: "#6ea8fe", osaka: "#e8b86a", kyoto: "#6bcf95", seoul: "#c39bff", travel: "#9aa3b5" };
+            const active = selectedId === d.id;
+            return `<g style="cursor:pointer" data-id="${d.id}">
+              <circle cx="${xs[i]}" cy="${ys[i]}" r="${active ? 8 : 5}" fill="${colors[d.city]}" stroke="#fff" stroke-width="2"/>
+              <text class="lbl" x="${xs[i]}" y="${ys[i] + 18}" text-anchor="middle">${d.date.replace(/Aug |Sept /, "")}</text>
+            </g>`;
+          }).join("")}
+        </svg></div>`;
+      }
+
+      stage.innerHTML = html;
+    }
+
+    document.getElementById("timeline-styles").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-tl]");
+      if (!btn) return;
+      timelineStyle = btn.dataset.tl;
+      localStorage.setItem(TL_KEY, timelineStyle);
+      renderTimeline();
+    });
+    document.getElementById("timeline-stage").addEventListener("click", (e) => {
+      const hit = e.target.closest("[data-id]");
+      if (!hit) return;
+      selectDayFromTimeline(hit.dataset.id);
+    });
 
     function filteredDays() {
       return window.DAYS.filter((d) => filter === "all" || d.city === filter);
@@ -707,6 +1034,8 @@
         <div class="stat"><strong>16</strong><span>Calendar days</span></div>
         <div class="stat"><strong>Ritz pts</strong><span>Kyoto $0 cash</span></div>
         <div class="stat"><strong>Maps</strong><span>Numbered pins / day</span></div>`;
+
+      renderTimeline();
 
       const cities = ["all", "tokyo", "osaka", "kyoto", "seoul", "travel"];
       document.getElementById("filters").innerHTML = cities.map((c) =>
