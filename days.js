@@ -17,7 +17,7 @@ window.DAYS = [
     "book": [],
     "activities": [
       {
-        "name": "Airport check-in / depart",
+        "name": "✈️ Airport check-in / depart",
         "cost": "Already booked",
         "excludeFromTotal": true,
         "blurb": "Clay UA803 IAD→HND · Tom UA79 · screenshot boarding passes.",
@@ -27,7 +27,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Airplane snacks",
+        "name": "🍫 Airplane snacks",
         "cost": "~$15–30",
         "blurb": "Eat a real meal before boarding.",
         "lat": 38.9531,
@@ -68,7 +68,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Land Haneda (HND)",
+        "name": "🛬 Land Haneda (HND)",
         "cost": "Booked",
         "excludeFromTotal": true,
         "blurb": "Clay ~3:55pm UA803. Immigration + bags.",
@@ -78,7 +78,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Keikyu/train to Shibuya hostel",
+        "name": "🚆 Keikyu/train to Shibuya hostel",
         "cost": "¥500–800 (~$3–5)",
         "blurb": "Keikyu Airport Line into the city; Suica/Pasmo.",
         "url": "https://www.japan-guide.com/e/e2430.html",
@@ -91,7 +91,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Omoide Yokocho yakitori",
+        "name": "🍢 Omoide Yokocho yakitori",
         "cost": "¥3–5k (~$19–32)",
         "blurb": "Alley under Shinjuku tracks; point at the grill.",
         "url": "https://www.japan-guide.com/e/e3075.html",
@@ -104,7 +104,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Golden Gai bar hop",
+        "name": "🍻 Golden Gai bar hop",
         "cost": "¥3–6k (~$19–38)",
         "blurb": "Tiny bars; cover normal. Skip Kabukicho touts.",
         "url": "https://www.japan-guide.com/e/e3011.html",
@@ -150,7 +150,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Meiji Shrine + Yoyogi",
+        "name": "⛩️ Meiji Shrine + Yoyogi",
         "cost": "Free",
         "blurb": "Forest shrine; go early then Yoyogi Park.",
         "url": "https://www.meijijingu.or.jp/en/",
@@ -159,7 +159,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Shibuya Sky",
+        "name": "🏙️ Shibuya Sky",
         "cost": "¥2,700–3,400 (~$17–22)",
         "blurb": "Rooftop on Scramble Square; evening slots sell out.",
         "url": "https://www.shibuya-scramble-square.com/sky/",
@@ -172,7 +172,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Yakiniku dinner",
+        "name": "🥩 Yakiniku dinner",
         "cost": "¥8–15k (~$50–95)",
         "blurb": "Book Ushifuji or Jojoen via TableCheck.",
         "url": "https://www.tablecheck.com/",
@@ -185,7 +185,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Karaoke Shibuya",
+        "name": "🎤 Karaoke Shibuya",
         "cost": "¥2–4k (~$13–25)",
         "blurb": "Private room + nomihodai. Big Echo / Karaoke Kan.",
         "url": "https://www.japan-guide.com/e/e2369.html",
@@ -198,7 +198,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Optional club (ATOM/Womb)",
+        "name": "🪩 Optional club (ATOM/Womb)",
         "cost": "¥2–4k (~$13–25) entry",
         "blurb": "Dogenzaka — floors fill after midnight.",
         "url": "https://www.womb.co.jp/",
@@ -236,7 +236,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Senso-ji (Asakusa)",
+        "name": "🏯 Senso-ji (Asakusa)",
         "cost": "Free",
         "blurb": "Oldest temple + Nakamise. Go early.",
         "url": "https://www.senso-ji.jp/english/",
@@ -245,7 +245,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "teamLab Planets",
+        "name": "🌌 teamLab Planets",
         "cost": "¥3,600+ (~$23+)",
         "blurb": "Immersive art; barefoot/water rooms. Timed entry.",
         "url": "https://www.teamlab.art/e/planets/",
@@ -258,7 +258,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Standing sushi / casual dinner",
+        "name": "🍣 Standing sushi / casual dinner",
         "cost": "¥2–5k (~$13–32)",
         "blurb": "Counter sushi near Toyosu or back toward hotel.",
         "url": "https://www.japan-guide.com/e/e2036.html",
@@ -271,7 +271,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Soft Shinjuku night",
+        "name": "🌃 Soft Shinjuku night",
         "cost": "¥2–5k (~$13–32)",
         "blurb": "Lighter Golden Gai / arcades. Skip Robot Restaurant.",
         "url": "https://www.japan-guide.com/e/e3034.html",
@@ -317,7 +317,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Tokyo Station → Nozomi Shinkansen",
+        "name": "🚅 Tokyo Station → Nozomi Shinkansen",
         "cost": "~¥14,000 (~$89)",
         "blurb": "Fastest bullet ~2.5h to Shin-Osaka.",
         "url": "https://www.japan-guide.com/e/e2018.html",
@@ -326,7 +326,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Arrive Shin-Osaka → Shinsaibashi hostel",
+        "name": "🏨 Arrive Shin-Osaka → Shinsaibashi hostel",
         "cost": "¥230 (~$1.50)",
         "blurb": "Midosuji Line to Shinsaibashi.",
         "url": "https://www.japan-guide.com/e/e2157.html",
@@ -339,7 +339,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Dotonbori street food",
+        "name": "🍜 Dotonbori street food",
         "cost": "¥3–6k (~$19–38)",
         "blurb": "Neon canal — takoyaki, kushikatsu, Glico sign.",
         "url": "https://www.japan-guide.com/e/e4015.html",
@@ -352,7 +352,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Gaming bar + karaoke",
+        "name": "🎮 Gaming bar + karaoke",
         "cost": "¥3–6k (~$19–38)",
         "blurb": "Retro gaming bars + karaoke until late.",
         "url": "https://www.japan-guide.com/e/e2369.html",
@@ -390,7 +390,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Kuromon Market",
+        "name": "🐟 Kuromon Market",
         "cost": "¥1–3k (~$6–19)",
         "blurb": "Snack breakfast — grilled seafood skewers.",
         "url": "https://www.japan-guide.com/e/e4027.html",
@@ -399,7 +399,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Amerikamura",
+        "name": "🛹 Amerikamura",
         "cost": "Free–cheap",
         "blurb": "Streetwear / youth district west of Shinsaibashi.",
         "url": "https://www.japan-guide.com/e/e4014.html",
@@ -412,7 +412,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Shinsekai / Tsutenkaku",
+        "name": "🗼 Shinsekai / Tsutenkaku",
         "cost": "Tower ~¥900 (~$6)",
         "blurb": "Retro Osaka + kushikatsu dens.",
         "url": "https://www.japan-guide.com/e/e4026.html",
@@ -425,7 +425,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Nice Osaka dinner",
+        "name": "🍽️ Nice Osaka dinner",
         "cost": "¥4–15k (~$25–95)",
         "blurb": "Okonomiyaki or wagyu — book the nicer one.",
         "url": "https://www.japan-guide.com/e/e2346.html",
@@ -471,7 +471,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "JR Osaka → Kyoto Station",
+        "name": "🚆 JR Osaka → Kyoto Station",
         "cost": "¥560–1,500 (~$4–10)",
         "blurb": "Special Rapid ~15–30 min.",
         "url": "https://www.japan-guide.com/e/e2363.html",
@@ -480,7 +480,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Ritz-Carlton check-in",
+        "name": "🛎️ Ritz-Carlton check-in",
         "cost": "Points",
         "blurb": "On the Kamo River — soft arrival afternoon.",
         "url": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
@@ -493,7 +493,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Nishiki Market",
+        "name": "🥒 Nishiki Market",
         "cost": "¥2–4k (~$13–25)",
         "blurb": "Kyoto’s pantry street — graze lunch.",
         "url": "https://www.japan-guide.com/e/e3928.html",
@@ -506,7 +506,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Pontocho dinner",
+        "name": "🏮 Pontocho dinner",
         "cost": "¥8–15k (~$50–95)",
         "blurb": "Lantern alley; book riverside if available.",
         "url": "https://www.japan-guide.com/e/e3951.html",
@@ -519,7 +519,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Kiyamachi drinks",
+        "name": "🍻 Kiyamachi drinks",
         "cost": "¥3–6k (~$19–38)",
         "blurb": "Bars parallel to Pontocho.",
         "url": "https://www.japan-guide.com/e/e3951.html",
@@ -552,7 +552,7 @@ window.DAYS = [
     "book": [],
     "activities": [
       {
-        "name": "Kiyomizu-dera",
+        "name": "🛕 Kiyomizu-dera",
         "cost": "¥500 (~$3)",
         "blurb": "Hillside temple — taxi up, walk down.",
         "url": "https://www.kiyomizudera.or.jp/en/",
@@ -561,7 +561,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Sannenzaka → Gion",
+        "name": "👘 Sannenzaka → Gion",
         "cost": "Free",
         "blurb": "Stone streets down. No private alleys (fines).",
         "url": "https://www.japan-guide.com/e/e3902.html",
@@ -574,7 +574,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Casual dinner near river",
+        "name": "🍽️ Casual dinner near river",
         "cost": "¥2–5k (~$13–32)",
         "blurb": "Kawaramachi / Gion area — no big reservation needed.",
         "lat": 35.0035,
@@ -586,7 +586,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Soft Kiyamachi drinks",
+        "name": "🍻 Soft Kiyamachi drinks",
         "cost": "¥2–4k (~$13–25)",
         "blurb": "Easy night — early start for Inari tomorrow.",
         "url": "https://www.japan-guide.com/e/e3951.html",
@@ -619,7 +619,7 @@ window.DAYS = [
     "book": [],
     "activities": [
       {
-        "name": "Fushimi Inari hike",
+        "name": "🦊 Fushimi Inari hike",
         "cost": "Free",
         "blurb": "Torii tunnels — go at open.",
         "url": "https://inari.jp/en/",
@@ -628,7 +628,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Optional Fushimi sake tasting",
+        "name": "🍶 Optional Fushimi sake tasting",
         "cost": "¥1–3k (~$6–19)",
         "blurb": "Sake district south of the shrine.",
         "url": "https://www.japan-guide.com/e/e3961.html",
@@ -641,7 +641,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Dinner + karaoke night",
+        "name": "🎤 Dinner + karaoke night",
         "cost": "¥5–10k (~$32–63)",
         "blurb": "Back to central Kyoto for bigger night.",
         "url": "https://www.japan-guide.com/e/e2369.html",
@@ -679,7 +679,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Arashiyama Bamboo Grove",
+        "name": "🎋 Arashiyama Bamboo Grove",
         "cost": "Free",
         "blurb": "Go at open before crowds.",
         "url": "https://www.japan-guide.com/e/e3910.html",
@@ -688,7 +688,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Tenryu-ji garden",
+        "name": "🏯 Tenryu-ji garden",
         "cost": "¥500 (~$3)",
         "blurb": "Zen garden next to the bamboo.",
         "url": "https://www.tenryuji.com/en/",
@@ -701,7 +701,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Optional monkey park",
+        "name": "🐵 Optional monkey park",
         "cost": "¥600 (~$4)",
         "blurb": "Iwatayama — view + monkeys.",
         "url": "https://www.japan-guide.com/e/e3941.html",
@@ -714,7 +714,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Ritz / kaiseki dinner",
+        "name": "🍱 Ritz / kaiseki dinner",
         "cost": "¥15–30k (~$95–190)",
         "blurb": "Trip splurge — concierge books this.",
         "url": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/dining/",
@@ -752,7 +752,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "A) Kinkaku-ji",
+        "name": "✨ A) Kinkaku-ji",
         "cost": "¥500 (~$3) + taxi",
         "blurb": "Golden Pavilion — taxi between north sites.",
         "url": "https://www.shokoku-ji.jp/en/kinkakuji/",
@@ -761,7 +761,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "B) Nara day trip (alt)",
+        "name": "🦌 B) Nara day trip (alt)",
         "cost": "~¥1,500+¥800 (~$15 total)",
         "excludeFromTotal": true,
         "blurb": "Todai-ji + deer park. Pick A or B or C.",
@@ -775,7 +775,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Last Kyoto dinner + drinks",
+        "name": "🍶 Last Kyoto dinner + drinks",
         "cost": "¥5–10k (~$32–63)",
         "blurb": "Pontocho/Kiyamachi send-off; pack first.",
         "url": "https://www.japan-guide.com/e/e3951.html",
@@ -821,7 +821,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Haruka to KIX",
+        "name": "🚆 Haruka to KIX",
         "cost": "¥3–4k (~$19–25)",
         "blurb": "Reserved-seat airport express from Kyoto.",
         "url": "https://www.japan-guide.com/e/e2363.html",
@@ -830,7 +830,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Fly to ICN",
+        "name": "✈️ Fly to ICN",
         "cost": "TBD (book)",
         "excludeFromTotal": true,
         "blurb": "Still need to book this flight.",
@@ -844,7 +844,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "AREX to Hongik Univ",
+        "name": "🚆 AREX to Hongik Univ",
         "cost": "₩10–20k (~$7–14)",
         "blurb": "Airport Railroad to Hongdae.",
         "url": "https://www.airportrailroad.com/intro",
@@ -857,7 +857,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Korean BBQ + soju",
+        "name": "🥩 Korean BBQ + soju",
         "cost": "₩40–80k (~$28–57)",
         "blurb": "Mapo/Hongdae BBQ — wrap meat in lettuce.",
         "url": "https://english.visitkorea.or.kr/",
@@ -890,7 +890,7 @@ window.DAYS = [
     "book": [],
     "activities": [
       {
-        "name": "Gyeongbokgung",
+        "name": "👑 Gyeongbokgung",
         "cost": "₩3,000 (~$2)",
         "blurb": "Main palace — guard ceremony if timing hits.",
         "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=87740",
@@ -899,7 +899,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Bukchon / Ikseon",
+        "name": "🏘️ Bukchon / Ikseon",
         "cost": "₩10–20k (~$7–14) food",
         "blurb": "Hanok exteriors + cafe alleys.",
         "url": "https://english.visitkorea.or.kr/",
@@ -912,7 +912,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Gwangjang Market",
+        "name": "🥟 Gwangjang Market",
         "cost": "Included above",
         "blurb": "Bindaetteok, mayak gimbap, market chaos.",
         "url": "https://english.visitkorea.or.kr/",
@@ -925,7 +925,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Hongdae noraebang + bars",
+        "name": "🎤 Hongdae noraebang + bars",
         "cost": "₩20–40k (~$14–28)",
         "blurb": "Private karaoke then nightlife. Start late.",
         "url": "https://english.visitkorea.or.kr/",
@@ -957,7 +957,7 @@ window.DAYS = [
     "book": [],
     "activities": [
       {
-        "name": "Seongsu cafes (or COEX alt)",
+        "name": "☕ Seongsu cafes (or COEX alt)",
         "cost": "Café ₩8–15k (~$6–11) / COEX free",
         "blurb": "Pick one modern cluster.",
         "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=60729",
@@ -966,7 +966,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Chi-maek or BBQ",
+        "name": "🍗 Chi-maek or BBQ",
         "cost": "₩25–60k (~$18–43)",
         "blurb": "Fried chicken + beer fuel.",
         "lat": 37.556,
@@ -978,7 +978,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Hongdae finale",
+        "name": "🎉 Hongdae finale",
         "cost": "₩20–40k (~$14–28)",
         "blurb": "Bars / club send-off.",
         "lat": 37.5563,
@@ -990,7 +990,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "Optional jjimjilbang",
+        "name": "🧖 Optional jjimjilbang",
         "cost": "₩10–15k (~$7–11)",
         "blurb": "24h sauna overnight recovery.",
         "url": "https://english.visitkorea.or.kr/",
@@ -1036,7 +1036,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "AREX to ICN",
+        "name": "🚆 AREX to ICN",
         "cost": "₩10–20k (~$7–14)",
         "blurb": "From Hongik to Incheon Airport.",
         "url": "https://www.airportrailroad.com/intro",
@@ -1045,7 +1045,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Fly ICN → HND",
+        "name": "✈️ Fly ICN → HND",
         "cost": "TBD (book)",
         "excludeFromTotal": true,
         "blurb": "Prefer HND for Clay’s early flight.",
@@ -1059,7 +1059,7 @@ window.DAYS = [
         }
       },
       {
-        "name": "plat hostel Haneda",
+        "name": "🛏️ plat hostel Haneda",
         "cost": "¥4–7k (~$25–44)",
         "blurb": "Keikyu to Anamori-Inari, short walk.",
         "url": "https://plat-hostel-keikyu.com/en/hostel/haneda-home/index_11.html",
@@ -1100,7 +1100,7 @@ window.DAYS = [
     ],
     "activities": [
       {
-        "name": "Clay: NH102 HND 10:20 → IAD",
+        "name": "✈️ Clay: NH102 HND 10:20 → IAD",
         "cost": "Booked",
         "excludeFromTotal": true,
         "blurb": "Leave hostel early for HND.",
@@ -1110,7 +1110,7 @@ window.DAYS = [
         "travelFromPrev": null
       },
       {
-        "name": "Tom: UA78 NRT 17:25 → EWR",
+        "name": "✈️ Tom: UA78 NRT 17:25 → EWR",
         "cost": "Booked",
         "excludeFromTotal": true,
         "blurb": "Keikyu + JR to Narita with buffer.",
