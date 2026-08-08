@@ -25,7 +25,7 @@
       line-height: 1.45;
     }
     a { color: var(--accent); }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 80px; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px 80px; }
 
     #gate { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
     #gate.hidden, #app.hidden { display: none; }
@@ -43,7 +43,7 @@
       border: 1px solid var(--line); background: var(--bg); color: var(--text);
       font-size: 1rem; margin-bottom: 12px;
     }
-    .gate-card button, .filters button {
+    .gate-card button {
       border: 0; border-radius: 999px; padding: 10px 16px;
       background: var(--accent); color: #081018; font-weight: 600; cursor: pointer;
     }
@@ -51,43 +51,21 @@
 
     header h1 { margin: 0 0 6px; font-size: 1.75rem; }
     header p { margin: 0; color: var(--muted); }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px; margin: 18px 0;
-    }
-    .stat {
-      background: var(--panel); border: 1px solid var(--line);
-      border-radius: 10px; padding: 12px;
-    }
-    .stat strong { display: block; font-size: 1.1rem; }
-    .stat span { color: var(--muted); font-size: 0.8rem; }
-    .banner {
-      background: #2a2416; border: 1px solid #5c4a1f; color: #f5d78e;
-      border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.95rem;
-    }
-
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
-    .filters button {
-      background: var(--panel2); color: var(--text); border: 1px solid var(--line);
-    }
-    .filters button.active { background: var(--accent); color: #081018; border-color: transparent; }
 
     .card {
       background: var(--panel); border: 1px solid var(--line);
-      border-radius: 12px; margin-bottom: 16px;
-      /* overflow visible so tooltips aren't clipped */
+      border-radius: 12px; margin: 0; min-width: 0;
     }
     .card-head:first-child { border-radius: 12px 12px 0 0; }
     .hero, .map { overflow: hidden; }
     .card-head {
-      display: flex; justify-content: space-between; gap: 12px; align-items: center;
-      padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--panel2);
+      display: flex; justify-content: space-between; gap: 8px; align-items: flex-start;
+      padding: 12px; border-bottom: 1px solid var(--line); background: var(--panel2);
     }
-    .card-head h2 { margin: 0; font-size: 1.05rem; }
+    .card-head h2 { margin: 0; font-size: 0.92rem; line-height: 1.3; }
     .badges { display: flex; gap: 6px; flex-wrap: wrap; }
     .badge {
-      font-size: 0.75rem; padding: 4px 8px; border-radius: 999px; background: #243044;
+      font-size: 0.7rem; padding: 3px 7px; border-radius: 999px; background: #243044;
     }
     .badge.tokyo { background: #1c3358; }
     .badge.osaka { background: #4a3a12; }
@@ -98,7 +76,7 @@
     .badge.none { background: #163828; }
 
     .hero {
-      width: 100%; height: 180px; object-fit: cover; display: block; background: #222;
+      width: 100%; height: 120px; object-fit: cover; display: block; background: #222;
     }
     .map-wrap {
       position: relative;
@@ -106,33 +84,27 @@
       background: #1a1f2a;
     }
     .map {
-      height: min(42vh, 420px);
-      min-height: 280px;
+      height: 220px;
       width: 100%;
       background: #1a1f2a;
       z-index: 1;
     }
     .map-tour {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px;
       background: var(--panel2);
       border-top: 1px solid var(--line);
     }
     .map-tour button {
       border: 1px solid var(--line); background: var(--panel); color: var(--text);
-      width: 36px; height: 36px; border-radius: 8px; font-size: 1.1rem;
+      width: 32px; height: 32px; border-radius: 8px; font-size: 1rem;
       cursor: pointer; line-height: 1; flex: 0 0 auto;
     }
-    .map-tour button:disabled {
-      opacity: 0.35; cursor: default;
-    }
+    .map-tour button:disabled { opacity: 0.35; cursor: default; }
     .map-tour button:not(:disabled):hover { border-color: var(--accent); color: var(--accent); }
-    .map-tour-label {
-      flex: 1; min-width: 0;
-      font-size: 0.88rem; line-height: 1.3;
-    }
+    .map-tour-label { flex: 1; min-width: 0; font-size: 0.8rem; line-height: 1.3; }
     .map-tour-label strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .map-tour-label span { color: var(--muted); font-size: 0.78rem; }
+    .map-tour-label span { color: var(--muted); font-size: 0.72rem; }
     .leaflet-container { font: inherit; background: #1a1f2a; }
     .leaflet-popup { margin-bottom: 12px; }
     .num-marker {
@@ -146,54 +118,46 @@
       background: #ffd166; transform: scale(1.2);
       box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.45), 0 2px 8px rgba(0,0,0,.4);
     }
-    .leaflet-popup-content {
-      margin: 8px 10px;
-      min-width: 180px;
-      max-width: 220px;
-    }
+    .leaflet-popup-content { margin: 8px 10px; min-width: 180px; max-width: 220px; }
     .map-popup-img {
-      width: 100%;
-      height: 88px;
-      object-fit: cover;
-      border-radius: 6px;
-      display: block;
-      margin-bottom: 6px;
-      background: #222;
+      width: 100%; height: 88px; object-fit: cover; border-radius: 6px;
+      display: block; margin-bottom: 6px; background: #222;
     }
     .map-popup-title { font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
     .map-popup-blurb { color: #555; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
     .map-popup-link { color: #1a5fb4; text-decoration: underline; }
     .map-popup-link:hover { color: #0b3d7a; }
 
-    .card-body { padding: 16px; display: grid; gap: 14px; }
+    .card-body { padding: 12px; display: grid; gap: 12px; }
     .section-label {
-      font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+      font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 6px;
     }
     .total {
-      background: #182033; border: 1px solid #2f4570; border-radius: 10px; padding: 12px 14px;
+      background: #182033; border: 1px solid #2f4570; border-radius: 10px; padding: 10px 12px;
+      font-size: 0.9rem;
     }
-    .stay-detail, .muted { color: var(--muted); font-size: 0.92rem; }
+    .stay-detail, .muted { color: var(--muted); font-size: 0.85rem; }
 
     .activity {
-      display: grid; grid-template-columns: 32px 1fr auto; gap: 8px 10px;
-      padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start;
+      display: grid; grid-template-columns: 28px 1fr auto; gap: 6px 8px;
+      padding: 10px 0; border-bottom: 1px solid var(--line); align-items: start;
     }
     .activity:last-child { border-bottom: 0; }
     .act-num {
-      width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+      width: 24px; height: 24px; border-radius: 50%; background: var(--accent);
       color: #081018; font-weight: 800; display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; margin-top: 2px;
+      font-size: 0.75rem; margin-top: 2px;
     }
-    .activity .cost { font-weight: 600; white-space: nowrap; }
+    .activity .cost { font-weight: 600; white-space: nowrap; font-size: 0.8rem; }
     .travel {
       grid-column: 1 / -1;
-      margin: 0 0 4px 42px;
-      padding: 6px 10px;
+      margin: 0 0 4px 36px;
+      padding: 5px 8px;
       background: var(--panel2);
       border-left: 3px solid var(--accent);
       border-radius: 0 8px 8px 0;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: var(--muted);
     }
     .travel strong { color: var(--text); }
@@ -205,8 +169,7 @@
       line-height: 1; padding: 0; flex: 0 0 auto;
     }
     .tip .bubble {
-      position: fixed; /* escapes card overflow / grid clipping */
-      left: 0; top: 0;
+      position: fixed; left: 0; top: 0;
       width: max-content;
       max-width: min(340px, calc(100vw - 24px));
       background: #0b0d12; color: var(--text); border: 1px solid var(--line);
@@ -219,17 +182,14 @@
       opacity: 1; visibility: visible; pointer-events: auto;
     }
     .activity .blurb {
-      color: var(--muted); font-size: 0.82rem; margin-top: 2px; line-height: 1.35;
+      color: var(--muted); font-size: 0.78rem; margin-top: 2px; line-height: 1.35;
     }
 
-    .book-item { margin: 6px 0; }
-    .grid-all { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 8px; }
-    .grid-all .card.active { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .book-item { margin: 6px 0; font-size: 0.88rem; }
     footer { margin-top: 28px; color: var(--muted); font-size: 0.85rem; }
 
-    /* —— Trip timeline (proportional segments) —— */
     .timeline-panel {
-      margin: 18px 0 8px;
+      margin: 18px 0 12px;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -244,53 +204,87 @@
       color: var(--muted); font-weight: 700;
     }
     .timeline-head .tl-meta { color: var(--muted); font-size: 0.8rem; }
-    .timeline-stage { overflow-x: auto; padding-bottom: 2px; }
-    .tl-segments {
-      display: flex; gap: 3px; min-width: 560px; height: 72px;
-      border-radius: 12px; overflow: hidden;
+    .tl-bar {
+      display: flex; gap: 3px; min-height: 44px; border-radius: 10px; overflow: hidden;
     }
-    .tl-segments .seg {
-      border: 0; border-radius: 0; padding: 10px 12px; cursor: pointer; color: #0b0d12;
-      display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
-      min-width: 0; text-align: left; font: inherit; font-weight: 700; font-size: 0.82rem;
+    .tl-bar .seg {
+      border: 0; padding: 10px 8px; cursor: pointer; color: #0b0d12;
+      display: flex; align-items: center; justify-content: center;
+      min-width: 0; text-align: center; font: inherit; font-weight: 800; font-size: 0.8rem;
       transition: filter .15s ease, box-shadow .15s ease;
     }
-    .tl-segments .seg:hover { filter: brightness(1.06); }
-    .tl-segments .seg .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-    .tl-segments .seg .sub {
-      font-weight: 600; font-size: 0.68rem; opacity: .78; white-space: nowrap;
-      overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+    .tl-bar .seg:hover { filter: brightness(1.06); }
+    .tl-bar .seg .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .tl-bar .seg.tokyo { background: #6ea8fe; }
+    .tl-bar .seg.osaka { background: #e8b86a; }
+    .tl-bar .seg.kyoto { background: #6bcf95; }
+    .tl-bar .seg.seoul { background: #c39bff; }
+    .tl-bar .seg.travel { background: #9aa3b5; }
+    .tl-bar .seg.active { box-shadow: inset 0 0 0 2px #fff; }
+    .tl-dates { display: flex; gap: 3px; margin-top: 8px; }
+    .tl-dates .tick {
+      min-width: 0; text-align: center; font-size: 0.72rem; color: var(--muted);
+      line-height: 1.25; padding: 0 2px;
     }
-    .tl-segments .seg.tokyo { background: #6ea8fe; }
-    .tl-segments .seg.osaka { background: #e8b86a; }
-    .tl-segments .seg.kyoto { background: #6bcf95; }
-    .tl-segments .seg.seoul { background: #c39bff; }
-    .tl-segments .seg.travel { background: #9aa3b5; }
-    .tl-segments .seg.active { box-shadow: inset 0 0 0 2px #fff; }
+    .tl-dates .tick strong { display: block; color: var(--text); font-weight: 700; font-size: 0.74rem; }
+    .tl-dates .tick.active strong { color: var(--accent); }
 
-    /* —— Interactive checklist —— */
-    .todo-panel {
-      margin: 12px 0 8px;
+    .legs { display: grid; gap: 10px; margin-top: 4px; }
+    .leg {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 14px 14px 10px;
+      overflow: clip;
     }
-    .todo-head {
+    .leg > summary {
+      list-style: none; cursor: pointer; user-select: none;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 14px 16px; background: var(--panel2);
+    }
+    .leg > summary::-webkit-details-marker { display: none; }
+    .leg .leg-swatch { width: 10px; height: 28px; border-radius: 999px; flex: 0 0 auto; }
+    .leg.tokyo .leg-swatch { background: #6ea8fe; }
+    .leg.osaka .leg-swatch { background: #e8b86a; }
+    .leg.kyoto .leg-swatch { background: #6bcf95; }
+    .leg.seoul .leg-swatch { background: #c39bff; }
+    .leg.travel .leg-swatch { background: #9aa3b5; }
+    .leg .leg-title { font-weight: 800; font-size: 1.05rem; }
+    .leg .leg-meta { color: var(--muted); font-size: 0.85rem; }
+    .leg .leg-chev { margin-left: auto; color: var(--muted); font-size: 0.85rem; transition: transform .15s ease; }
+    .leg[open] .leg-chev { transform: rotate(90deg); }
+    .leg-days {
+      display: flex; gap: 12px; padding: 12px; overflow-x: auto;
+      align-items: stretch; border-top: 1px solid var(--line);
+    }
+    .leg-days .card { flex: 1 1 0; min-width: min(280px, 78vw); }
+    .leg-days .card.active { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .leg.active-leg { border-color: #4a5568; }
+
+    .todo-panel {
+      margin: 0 0 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: clip;
+    }
+    .todo-panel > summary {
+      list-style: none; cursor: pointer; user-select: none;
       display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
-      justify-content: space-between; margin-bottom: 10px;
+      padding: 14px 16px; background: var(--panel2);
     }
-    .todo-head h2 {
-      margin: 0; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase;
+    .todo-panel > summary::-webkit-details-marker { display: none; }
+    .todo-panel .todo-title {
+      font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase;
       color: var(--muted); font-weight: 700;
     }
-    .todo-progress-wrap { display: flex; align-items: center; gap: 10px; min-width: 180px; flex: 1; max-width: 320px; }
-    .todo-bar {
-      flex: 1; height: 8px; border-radius: 999px; background: #1a2233; overflow: hidden;
-    }
+    .todo-progress-wrap { display: flex; align-items: center; gap: 10px; min-width: 160px; flex: 1; max-width: 280px; }
+    .todo-bar { flex: 1; height: 8px; border-radius: 999px; background: #1a2233; overflow: hidden; }
     .todo-bar > i { display: block; height: 100%; width: 0; background: #6bcf95; transition: width .2s ease; }
     .todo-count { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
-    .todo-actions { display: flex; gap: 6px; }
+    .todo-panel .todo-chev { margin-left: auto; color: var(--muted); }
+    .todo-panel[open] .todo-chev { transform: rotate(90deg); }
+    .todo-inner { padding: 4px 14px 12px; border-top: 1px solid var(--line); }
+    .todo-actions { display: flex; gap: 6px; margin: 10px 0 4px; }
     .todo-actions button {
       border: 1px solid var(--line); background: var(--panel2); color: var(--text);
       border-radius: 8px; padding: 6px 10px; font-size: 0.75rem; cursor: pointer;
@@ -324,6 +318,7 @@
     }
     .todo-note { color: var(--muted); font-size: 0.75rem; margin: 4px 0 0; }
   </style>
+
 </head>
 <body>
   <div id="gate">
@@ -344,37 +339,35 @@
         <h1>Asia Trip 2026</h1>
         <p>Clay & Tom · Tokyo → Osaka → Ritz Kyoto → Seoul · Aug 27 – Sept 11</p>
       </header>
-      <div class="stats" id="stats"></div>
       <section class="timeline-panel" id="timeline-panel">
         <div class="timeline-head">
           <h2>Full trip</h2>
           <div class="tl-meta" id="timeline-meta"></div>
         </div>
-        <div class="timeline-stage" id="timeline-stage"></div>
+        <div id="timeline-stage"></div>
       </section>
-      <div class="banner">
-        Book first: hostels + Ritz + KIX→ICN + ICN→HND. Yellow days need bookings — links are on each day.
-      </div>
-      <section class="todo-panel" id="todo-panel">
-        <div class="todo-head">
-          <h2>Pre-trip checklist</h2>
+      <details class="todo-panel" id="todo-panel">
+        <summary>
+          <span class="todo-title">Pre-trip checklist</span>
           <div class="todo-progress-wrap">
             <div class="todo-bar" aria-hidden="true"><i id="todo-bar-fill"></i></div>
             <div class="todo-count" id="todo-count"></div>
           </div>
+          <span class="todo-chev">▸</span>
+        </summary>
+        <div class="todo-inner">
           <div class="todo-actions">
-            <button type="button" id="todo-expand">Expand all</button>
+            <button type="button" id="todo-expand">Expand sections</button>
             <button type="button" id="todo-reset">Reset checks</button>
           </div>
+          <div id="todo-body"></div>
+          <p class="todo-note">Checks save in this browser only.</p>
         </div>
-        <div id="todo-body"></div>
-        <p class="todo-note">Checks save in this browser only (shared with Tom on this device/password session).</p>
-      </section>
-      <div class="filters" id="filters"></div>
-      <div class="grid-all" id="all"></div>
+      </details>
+      <div class="legs" id="legs"></div>
       <footer>
-        Numbers on the map match activity numbers. Each day starts in full overview — use ◀ ▶ under that day’s map to walk stops in order.
-        Travel times are door-to-door estimates. Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
+        Open a leg to see its days side-by-side. Map numbers match activities — use ◀ ▶ to walk stops.
+        Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
       </footer>
     </div>
   </div>
@@ -614,6 +607,8 @@
 
     function initMaps() {
       document.querySelectorAll(".map[data-day-id]").forEach((el) => {
+        if (maps.has(el.id)) return;
+        if (!el.closest("details.leg[open]")) return;
         const day = window.DAYS.find((d) => d.id === el.dataset.dayId);
         if (!day) return;
         const pts = day.activities.filter((a) => a.lat != null && a.lng != null);
@@ -724,12 +719,27 @@
       });
     }
 
-    let filter = "all";
     let selectedId = "aug28";
+    let openLegs = new Set(); // empty = all collapsed initially
     const TODO_KEY = "asia-trip-2026-todo-v1";
 
     function cityPlain(city) {
       return ({ tokyo: "Tokyo", osaka: "Osaka", kyoto: "Kyoto", seoul: "Seoul", travel: "Travel" })[city] || city;
+    }
+
+    function legTitle(city, days) {
+      if (city === "kyoto") return "Ritz Kyoto";
+      if (city === "tokyo" && days.some((d) => d.id === "sep10")) return "Tokyo (Haneda)";
+      return cityPlain(city);
+    }
+
+    function formatLegRange(start, end) {
+      if (start === end) return start;
+      // "Aug 28–30" when same month
+      const sm = start.match(/^(Aug|Sept)\s+(\d+)$/);
+      const em = end.match(/^(Aug|Sept)\s+(\d+)$/);
+      if (sm && em && sm[1] === em[1]) return `${sm[1]} ${sm[2]}–${em[2]}`;
+      return `${start}–${end}`;
     }
 
     function cityChapters(days) {
@@ -740,17 +750,51 @@
           last.days.push(d);
           last.end = d.date;
         } else {
-          out.push({ city: d.city, start: d.date, end: d.date, days: [d], firstId: d.id });
+          out.push({
+            id: `leg-${d.id}`,
+            city: d.city,
+            start: d.date,
+            end: d.date,
+            days: [d],
+            firstId: d.id,
+          });
         }
       }
       return out;
     }
 
-    function selectDayFromTimeline(id) {
+    function refreshMapsIn(root) {
+      const refresh = () => {
+        (root || document).querySelectorAll(".map[data-day-id]").forEach((el) => {
+          const map = maps.get(el.id);
+          if (!map) return;
+          map.invalidateSize({ animate: false });
+          const tour = mapTours.get(el.id);
+          if (tour && tour.index < 0 && tour.latlngs?.length) {
+            map.fitBounds(tour.latlngs, { padding: [28, 28], maxZoom: 14, animate: false });
+          }
+        });
+      };
+      requestAnimationFrame(() => {
+        refresh();
+        setTimeout(refresh, 120);
+        setTimeout(refresh, 400);
+      });
+    }
+
+    function openLegForDay(id, { scroll = true } = {}) {
+      const chapters = cityChapters(window.DAYS);
+      const ch = chapters.find((c) => c.days.some((d) => d.id === id));
+      if (!ch) return;
       selectedId = id;
-      filter = "all";
+      openLegs.add(ch.id);
       render();
-      document.getElementById(`day-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const legEl = document.getElementById(ch.id);
+      if (legEl) legEl.open = true;
+      refreshMapsIn(legEl);
+      if (scroll) {
+        (document.getElementById(`day-${id}`) || legEl)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     function renderTimeline() {
@@ -759,22 +803,28 @@
       const meta = document.getElementById("timeline-meta");
       if (!stage) return;
       const chapters = cityChapters(days);
-      const total = days.length;
-      if (meta) meta.textContent = `${total} days · width = nights/days in each place`;
-      stage.innerHTML = `<div class="tl-segments">${chapters.map((ch) => {
+      if (meta) meta.textContent = `${days.length} days · proportional by stay length`;
+      const bar = chapters.map((ch) => {
         const active = ch.days.some((d) => d.id === selectedId) ? "active" : "";
-        const range = ch.start === ch.end ? ch.start : `${ch.start}–${ch.end}`;
-        return `<button type="button" class="seg ${ch.city} ${active}" data-id="${ch.firstId}" style="flex:${ch.days.length} 1 0" title="${escapeHtml(cityPlain(ch.city))} · ${ch.days.length} day${ch.days.length > 1 ? "s" : ""}">
+        return `<button type="button" class="seg ${ch.city} ${active}" data-leg="${ch.id}" data-id="${ch.firstId}" style="flex:${ch.days.length} 1 0" title="${escapeHtml(legTitle(ch.city, ch.days))}">
           <span class="name">${escapeHtml(cityPlain(ch.city))}</span>
-          <span class="sub">${escapeHtml(range)} · ${ch.days.length}d</span>
         </button>`;
-      }).join("")}</div>`;
+      }).join("");
+      const dates = chapters.map((ch) => {
+        const active = ch.days.some((d) => d.id === selectedId) ? "active" : "";
+        const range = formatLegRange(ch.start, ch.end);
+        return `<div class="tick ${active}" style="flex:${ch.days.length} 1 0">
+          <strong>${escapeHtml(range)}</strong>
+          ${ch.days.length}d
+        </div>`;
+      }).join("");
+      stage.innerHTML = `<div class="tl-bar">${bar}</div><div class="tl-dates">${dates}</div>`;
     }
 
     document.getElementById("timeline-stage").addEventListener("click", (e) => {
       const hit = e.target.closest("[data-id]");
       if (!hit) return;
-      selectDayFromTimeline(hit.dataset.id);
+      openLegForDay(hit.dataset.id);
     });
 
     function loadTodoState() {
@@ -826,8 +876,7 @@
       body.innerHTML = window.CHECKLIST.map((sec) => {
         const secDone = sec.items.filter((i) => todoState[i.id]).length;
         let openAttr = "";
-        if (firstPaint) openAttr = secDone < sec.items.length ? "open" : "";
-        else if (openMap[sec.id]) openAttr = "open";
+        if (!firstPaint && openMap[sec.id]) openAttr = "open";
         return `<details class="todo-section" data-sec="${sec.id}" ${openAttr}>
           <summary>
             <span class="chev">▸</span>
@@ -860,10 +909,12 @@
     document.getElementById("todo-body").addEventListener("click", (e) => {
       if (e.target.closest("a")) e.stopPropagation();
     });
-    document.getElementById("todo-expand").addEventListener("click", () => {
+    document.getElementById("todo-expand").addEventListener("click", (e) => {
+      e.preventDefault();
       document.querySelectorAll("#todo-body details").forEach((d) => { d.open = true; });
     });
-    document.getElementById("todo-reset").addEventListener("click", () => {
+    document.getElementById("todo-reset").addEventListener("click", (e) => {
+      e.preventDefault();
       if (!confirm("Clear all checklist checks on this browser?")) return;
       todoState = {};
       for (const sec of window.CHECKLIST || []) {
@@ -875,10 +926,6 @@
       renderChecklist();
     });
 
-    function filteredDays() {
-      return window.DAYS.filter((d) => filter === "all" || d.city === filter);
-    }
-
     function placeBubble(tip, { show = true } = {}) {
       const btn = tip.querySelector(".tip-btn");
       const bubble = tip.querySelector(".bubble");
@@ -887,7 +934,6 @@
       const pad = 12;
       const maxW = Math.min(340, window.innerWidth - pad * 2);
       bubble.style.maxWidth = maxW + "px";
-      // Measure while invisible, then show if requested
       bubble.style.visibility = "hidden";
       bubble.style.opacity = "0";
       bubble.style.left = "0px";
@@ -939,42 +985,53 @@
       });
     }
 
+    function renderLegs() {
+      const root = document.getElementById("legs");
+      const chapters = cityChapters(window.DAYS);
+      root.innerHTML = chapters.map((ch) => {
+        const open = openLegs.has(ch.id) ? "open" : "";
+        const active = ch.days.some((d) => d.id === selectedId) ? "active-leg" : "";
+        const range = formatLegRange(ch.start, ch.end);
+        const title = legTitle(ch.city, ch.days);
+        return `<details class="leg ${ch.city} ${active}" id="${ch.id}" data-leg="${ch.id}" ${open}>
+          <summary>
+            <span class="leg-swatch" aria-hidden="true"></span>
+            <span class="leg-title">${escapeHtml(title)}</span>
+            <span class="leg-meta">${escapeHtml(range)} · ${ch.days.length} day${ch.days.length > 1 ? "s" : ""}</span>
+            <span class="leg-chev">▸</span>
+          </summary>
+          <div class="leg-days">${ch.days.map((d) => dayCard(d)).join("")}</div>
+        </details>`;
+      }).join("");
+
+      root.querySelectorAll("details.leg").forEach((el) => {
+        el.addEventListener("toggle", () => {
+          if (el.open) {
+            openLegs.add(el.dataset.leg);
+            const first = el.querySelector("[data-day]");
+            if (first) selectedId = first.dataset.day;
+            document.querySelectorAll(".card.active").forEach((c) => c.classList.remove("active"));
+            el.querySelector(`.card[data-day="${selectedId}"]`)?.classList.add("active");
+            document.querySelectorAll(".leg.active-leg").forEach((l) => l.classList.remove("active-leg"));
+            el.classList.add("active-leg");
+            renderTimeline();
+            initMaps();
+            refreshMapsIn(el);
+          } else {
+            openLegs.delete(el.dataset.leg);
+          }
+        });
+      });
+    }
+
     function render() {
       destroyMaps();
-      const days = window.DAYS;
-      const trip = days.reduce((acc, d) => {
-        const t = dayTotalUsd(d);
-        return { min: acc.min + t.min, max: acc.max + t.max };
-      }, { min: 0, max: 0 });
-
-      document.getElementById("stats").innerHTML = `
-        <div class="stat"><strong>${formatUsdRange(trip.min, trip.max)}</strong><span>Trip total / person</span></div>
-        <div class="stat"><strong>16</strong><span>Calendar days</span></div>
-        <div class="stat"><strong>Ritz pts</strong><span>Kyoto $0 cash</span></div>
-        <div class="stat"><strong>Maps</strong><span>Numbered pins / day</span></div>`;
-
       renderTimeline();
       renderChecklist();
-
-      const cities = ["all", "tokyo", "osaka", "kyoto", "seoul", "travel"];
-      document.getElementById("filters").innerHTML = cities.map((c) =>
-        `<button type="button" data-filter="${c}" class="${filter === c ? "active" : ""}">${c === "all" ? "All" : cityLabel(c)}</button>`
-      ).join("");
-
-      const list = filteredDays();
-      document.getElementById("all").innerHTML = list.map((d) => dayCard(d)).join("");
+      renderLegs();
       wireTips();
       requestAnimationFrame(() => initMaps());
     }
-
-    document.getElementById("filters").addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-filter]");
-      if (!btn) return;
-      filter = btn.dataset.filter;
-      const list = filteredDays();
-      if (!list.some((d) => d.id === selectedId) && list[0]) selectedId = list[0].id;
-      render();
-    });
 
     function unlock() {
       document.getElementById("gate").classList.add("hidden");
