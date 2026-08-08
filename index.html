@@ -424,6 +424,10 @@
       return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
     }
 
+    function midpoint(a, b) {
+      return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    }
+
     function popupHtml(n, a) {
       const img = a.image
         ? `<img class="map-popup-img" src="${escapeHtml(a.image)}" alt="${escapeHtml(a.imageAlt || a.name)}" loading="lazy" />`
