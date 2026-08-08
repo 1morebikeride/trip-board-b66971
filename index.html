@@ -114,7 +114,10 @@
       background: #1a1f2a;
     }
     .map {
-      height: 280px; width: 100%; background: #1a1f2a;
+      height: min(52vh, 480px);
+      min-height: 360px;
+      width: 100%;
+      background: #1a1f2a;
       z-index: 1;
     }
     .map-tour {
@@ -138,7 +141,8 @@
     }
     .map-tour-label strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .map-tour-label span { color: var(--muted); font-size: 0.78rem; }
-    .leaflet-container { font: inherit; }
+    .leaflet-container { font: inherit; background: #1a1f2a; }
+    .leaflet-popup { margin-bottom: 12px; }
     .num-marker {
       background: var(--accent); color: #081018; border: 2px solid #fff;
       border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center;
@@ -151,21 +155,21 @@
       box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.45), 0 2px 8px rgba(0,0,0,.4);
     }
     .leaflet-popup-content {
-      margin: 10px 12px;
-      min-width: 200px;
-      max-width: 240px;
+      margin: 8px 10px;
+      min-width: 180px;
+      max-width: 220px;
     }
     .map-popup-img {
       width: 100%;
-      height: 120px;
+      height: 88px;
       object-fit: cover;
       border-radius: 6px;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       background: #222;
     }
-    .map-popup-title { font-weight: 700; font-size: 0.92rem; line-height: 1.3; }
-    .map-popup-blurb { color: #555; font-size: 0.8rem; line-height: 1.35; margin-top: 4px; }
+    .map-popup-title { font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
+    .map-popup-blurb { color: #555; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
     .map-popup-link { color: #1a5fb4; text-decoration: underline; }
     .map-popup-link:hover { color: #0b3d7a; }
 
@@ -265,7 +269,7 @@
       <h2 style="margin-top:28px">All days</h2>
       <div class="grid-all" id="all"></div>
       <footer>
-        Numbers on the map match activity numbers. Each day starts in full overview — use ◀ ▶ under that day’s map to walk stops in order.
+        Numbers on the focused-day map match activity numbers. Maps load only for the selected day (faster). Each day starts in full overview — use ◀ ▶ to walk stops.
         Travel times are door-to-door estimates. Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
       </footer>
     </div>
@@ -377,7 +381,7 @@
           </div>
         </div>
         ${compact ? "" : `<img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />`}
-        <div class="map-wrap">
+        ${compact ? "" : `<div class="map-wrap">
           <div class="map" id="${mapId}" data-day-id="${day.id}"></div>
           <div class="map-tour" data-map-id="${mapId}">
             <button type="button" class="map-prev" aria-label="Previous activity">◀</button>
@@ -387,7 +391,7 @@
             </div>
             <button type="button" class="map-next" aria-label="Next activity">▶</button>
           </div>
-        </div>
+        </div>`}
         <div class="card-body">
           <div class="total">
             <strong>Day total · ${formatUsdRange(total.min, total.max)} / person</strong>
@@ -485,8 +489,21 @@
       }
 
       const a = tour.pts[i];
-      tour.map.flyTo([a.lat, a.lng], Math.max(tour.map.getZoom(), 13), { duration: 0.45 });
-      tour.markers[i].openPopup();
+      const open = () => {
+        const popup = tour.markers[i].getPopup();
+        if (popup) {
+          popup.options.autoPan = true;
+          popup.options.autoPanPadding = [56, 72];
+          popup.options.keepInView = true;
+        }
+        tour.markers[i].openPopup();
+      };
+      tour.map.once("moveend", open);
+      tour.map.flyTo([a.lat, a.lng], Math.max(tour.map.getZoom(), 13), { duration: 0.35 });
+      // Fallback if already centered (moveend may not fire)
+      setTimeout(() => {
+        if (!tour.markers[i].isPopupOpen()) open();
+      }, 400);
     }
 
     function initMaps() {
@@ -505,10 +522,18 @@
           }
           return;
         }
-        const map = L.map(el, { scrollWheelZoom: false, attributionControl: true });
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        const map = L.map(el, {
+          scrollWheelZoom: false,
+          attributionControl: true,
+          // Prefer keeping popups fully inside the taller map area
+          maxBoundsViscosity: 0.8,
+        });
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
           maxZoom: 19,
-          attribution: "&copy; OpenStreetMap",
+          attribution: "&copy; OpenStreetMap &copy; CARTO",
+          // Faster perceived load: fewer parallel OSM edge cases
+          updateWhenIdle: true,
+          keepBuffer: 1,
         }).addTo(map);
 
         const latlngs = pts.map((a) => [a.lat, a.lng]);
@@ -551,7 +576,13 @@
             iconAnchor: [14, 14],
           });
           const marker = L.marker([a.lat, a.lng], { icon }).addTo(map);
-          marker.bindPopup(popupHtml(n, a), { maxWidth: 260, minWidth: 200, autoPan: true });
+          marker.bindPopup(popupHtml(n, a), {
+            maxWidth: 240,
+            minWidth: 180,
+            autoPan: true,
+            autoPanPadding: [56, 72],
+            keepInView: true,
+          });
           marker.on("click", () => setMapStep(el.id, i));
           markers.push(marker);
         });
