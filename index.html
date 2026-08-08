@@ -545,9 +545,14 @@
           controls.querySelector(".map-next").onclick = () =>
             setMapStep(el.id, mapTours.get(el.id).index + 1);
         }
-        // Start on full-day overview; ▶ walks 1 → 2 → …
+        // Start on full-day overview (all pins in view); ▶ walks 1 → 2 → …
         setMapStep(el.id, -1);
-        setTimeout(() => map.invalidateSize(), 50);
+        setTimeout(() => {
+          map.invalidateSize();
+          if (mapTours.get(el.id)?.index === -1) {
+            map.fitBounds(latlngs, { padding: [40, 40], maxZoom: 14, animate: false });
+          }
+        }, 80);
       });
     }
 
