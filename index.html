@@ -83,8 +83,11 @@
 
     .card {
       background: var(--panel); border: 1px solid var(--line);
-      border-radius: 12px; overflow: hidden; margin-bottom: 16px;
+      border-radius: 12px; margin-bottom: 16px;
+      /* overflow visible so tooltips aren't clipped */
     }
+    .card-head:first-child { border-radius: 12px 12px 0 0; }
+    .hero, .map { overflow: hidden; }
     .card-head {
       display: flex; justify-content: space-between; gap: 12px; align-items: center;
       padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--panel2);
@@ -150,21 +153,28 @@
     }
     .travel strong { color: var(--text); }
 
-    .tip { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+    .tip { position: relative; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }
     .tip-btn {
       border: 1px solid var(--line); background: var(--panel2); color: var(--muted);
       width: 22px; height: 22px; border-radius: 50%; font-size: 0.75rem; cursor: help;
-      line-height: 1; padding: 0;
+      line-height: 1; padding: 0; flex: 0 0 auto;
     }
     .tip .bubble {
-      position: absolute; left: 0; bottom: calc(100% + 8px); width: min(320px, 70vw);
+      position: fixed; /* escapes card overflow / grid clipping */
+      left: 0; top: 0;
+      width: max-content;
+      max-width: min(340px, calc(100vw - 24px));
       background: #0b0d12; color: var(--text); border: 1px solid var(--line);
       border-radius: 8px; padding: 10px 12px; font-size: 0.85rem;
+      line-height: 1.4; white-space: normal; overflow-wrap: anywhere; word-break: break-word;
       box-shadow: 0 8px 24px rgba(0,0,0,.45); opacity: 0; pointer-events: none;
-      transform: translateY(4px); transition: opacity .15s ease, transform .15s ease; z-index: 30;
+      visibility: hidden; z-index: 9999;
     }
     .tip:hover .bubble, .tip:focus-within .bubble, .tip.open .bubble {
-      opacity: 1; transform: translateY(0); pointer-events: auto;
+      opacity: 1; visibility: visible; pointer-events: auto;
+    }
+    .activity .blurb {
+      color: var(--muted); font-size: 0.82rem; margin-top: 2px; line-height: 1.35;
     }
 
     .book-item { margin: 6px 0; }
@@ -257,7 +267,7 @@
     }
 
     function cityLabel(city) {
-      return ({ tokyo: "Tokyo", osaka: "Osaka", kyoto: "Kyoto", seoul: "Seoul", travel: "Travel" })[city] || city;
+      return ({ tokyo: "🗼 Tokyo", osaka: "🍜 Osaka", kyoto: "⛩️ Kyoto", seoul: "🌆 Seoul", travel: "✈️ Travel" })[city] || city;
     }
     function actionLabel(kind) {
       return ({ book: "BOOK", prep: "PREP", none: "NO BOOKING" })[kind] || kind;
@@ -289,6 +299,7 @@
           <div class="act-num">${n}</div>
           <div>
             <div class="tip">${name} ${tipHtml(a.blurb)}</div>
+            <div class="blurb">${escapeHtml(a.blurb)}</div>
           </div>
           <div class="cost">${escapeHtml(a.cost)}</div>
         </div>`;
@@ -325,20 +336,20 @@
             <div class="stay-detail">Includes stay${day.stayCostNote ? ` (${escapeHtml(day.stayCostNote)})` : ""}. Excludes booked/TBD flights.</div>
           </div>
           <div>
-            <div class="section-label">Location</div>
+            <div class="section-label">📍 Location</div>
             <div>${escapeHtml(day.location)}</div>
           </div>
           <div>
-            <div class="section-label">Activities (numbered = map pins) + travel between</div>
+            <div class="section-label">🎯 Activities (numbered = map pins) + travel</div>
             ${day.activities.map((a, i) => activityBlock(a, i)).join("")}
           </div>
           <div>
-            <div class="section-label">Staying tonight</div>
+            <div class="section-label">🛏️ Staying tonight</div>
             <div><strong>${stayName}</strong></div>
             <div class="stay-detail">${escapeHtml(day.stayDetail)}</div>
           </div>
           <div>
-            <div class="section-label">Things to book</div>
+            <div class="section-label">📅 Things to book</div>
             ${bookList(day)}
           </div>
         </div>
@@ -395,14 +406,43 @@
       return window.DAYS.filter((d) => filter === "all" || d.city === filter);
     }
 
+    function placeBubble(tip) {
+      const btn = tip.querySelector(".tip-btn");
+      const bubble = tip.querySelector(".bubble");
+      if (!btn || !bubble) return;
+      const r = btn.getBoundingClientRect();
+      const pad = 12;
+      const maxW = Math.min(340, window.innerWidth - pad * 2);
+      bubble.style.maxWidth = maxW + "px";
+      // measure after making measurable
+      bubble.style.visibility = "hidden";
+      bubble.style.opacity = "0";
+      bubble.style.left = "0px";
+      bubble.style.top = "0px";
+      const bw = Math.min(bubble.offsetWidth || maxW, maxW);
+      const bh = bubble.offsetHeight || 48;
+      let left = r.left;
+      let top = r.top - bh - 10;
+      if (left + bw > window.innerWidth - pad) left = window.innerWidth - pad - bw;
+      if (left < pad) left = pad;
+      if (top < pad) top = r.bottom + 10;
+      bubble.style.left = left + "px";
+      bubble.style.top = top + "px";
+    }
+
     function wireTips() {
-      document.querySelectorAll(".tip-btn").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
+      document.querySelectorAll(".tip").forEach((tip) => {
+        const show = () => { placeBubble(tip); };
+        tip.addEventListener("mouseenter", show);
+        tip.addEventListener("focusin", show);
+        tip.querySelector(".tip-btn")?.addEventListener("click", (e) => {
           e.preventDefault(); e.stopPropagation();
-          const tip = btn.closest(".tip");
           const open = tip.classList.contains("open");
           document.querySelectorAll(".tip.open").forEach((t) => t.classList.remove("open"));
-          if (!open) tip.classList.add("open");
+          if (!open) {
+            tip.classList.add("open");
+            placeBubble(tip);
+          }
         });
       });
     }
