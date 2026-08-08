@@ -43,7 +43,7 @@
       border: 1px solid var(--line); background: var(--bg); color: var(--text);
       font-size: 1rem; margin-bottom: 12px;
     }
-    .gate-card button, .filters button, .day-nav button {
+    .gate-card button, .filters button {
       border: 0; border-radius: 999px; padding: 10px 16px;
       background: var(--accent); color: #081018; font-weight: 600; cursor: pointer;
     }
@@ -67,19 +67,11 @@
       border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.95rem;
     }
 
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-    .filters button, .day-nav button {
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
+    .filters button {
       background: var(--panel2); color: var(--text); border: 1px solid var(--line);
     }
     .filters button.active { background: var(--accent); color: #081018; border-color: transparent; }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 16px; }
-    .pill {
-      border: 1px solid var(--line); background: var(--panel); color: var(--text);
-      border-radius: 999px; padding: 8px 12px; font-size: 0.85rem; cursor: pointer;
-    }
-    .pill.active { outline: 2px solid var(--accent); }
-    .pill.book { border-color: #7a6118; }
-    .day-nav { display: flex; gap: 8px; margin-bottom: 12px; }
 
     .card {
       background: var(--panel); border: 1px solid var(--line);
@@ -114,15 +106,11 @@
       background: #1a1f2a;
     }
     .map {
-      height: min(52vh, 480px);
-      min-height: 360px;
+      height: min(42vh, 420px);
+      min-height: 280px;
       width: 100%;
       background: #1a1f2a;
       z-index: 1;
-    }
-    .map.map-compact {
-      height: 300px;
-      min-height: 300px;
     }
     .map-tour {
       display: flex; align-items: center; gap: 10px;
@@ -235,8 +223,8 @@
     }
 
     .book-item { margin: 6px 0; }
-    .grid-all { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
-    @media (min-width: 860px) { .grid-all { grid-template-columns: 1fr 1fr; } }
+    .grid-all { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 8px; }
+    .grid-all .card.active { outline: 2px solid var(--accent); outline-offset: 2px; }
     footer { margin-top: 28px; color: var(--muted); font-size: 0.85rem; }
 
     /* —— Trip timeline (proportional segments) —— */
@@ -383,13 +371,6 @@
         <p class="todo-note">Checks save in this browser only (shared with Tom on this device/password session).</p>
       </section>
       <div class="filters" id="filters"></div>
-      <div class="pill-row" id="pills"></div>
-      <div class="day-nav">
-        <button type="button" id="prev">Prev</button>
-        <button type="button" id="next">Next</button>
-      </div>
-      <div id="focus"></div>
-      <h2 style="margin-top:28px">All days</h2>
       <div class="grid-all" id="all"></div>
       <footer>
         Numbers on the map match activity numbers. Each day starts in full overview — use ◀ ▶ under that day’s map to walk stops in order.
@@ -489,14 +470,15 @@
       }).join("");
     }
 
-    function dayCard(day, { compact = false } = {}) {
+    function dayCard(day) {
       const total = dayTotalUsd(day);
       const stayName = day.stayUrl
         ? `<a href="${day.stayUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(day.stay)}</a>`
         : escapeHtml(day.stay);
-      const mapId = `map-${day.id}-${compact ? "g" : "f"}`;
+      const mapId = `map-${day.id}`;
+      const active = selectedId === day.id ? " active" : "";
 
-      return `<article class="card" data-day="${day.id}">
+      return `<article class="card${active}" data-day="${day.id}" id="day-${day.id}">
         <div class="card-head">
           <h2>${escapeHtml(day.weekday)} ${escapeHtml(day.date)} — ${escapeHtml(day.title)}</h2>
           <div class="badges">
@@ -504,9 +486,9 @@
             <span class="badge ${day.actionKind}">${actionLabel(day.actionKind)}</span>
           </div>
         </div>
-        ${compact ? "" : `<img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />`}
+        <img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />
         <div class="map-wrap">
-          <div class="map${compact ? " map-compact" : ""}" id="${mapId}" data-day-id="${day.id}"></div>
+          <div class="map" id="${mapId}" data-day-id="${day.id}"></div>
           <div class="map-tour" data-map-id="${mapId}">
             <button type="button" class="map-prev" aria-label="Previous activity">◀</button>
             <div class="map-tour-label">
@@ -768,7 +750,7 @@
       selectedId = id;
       filter = "all";
       render();
-      document.getElementById("focus")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById(`day-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function renderTimeline() {
@@ -980,16 +962,7 @@
       ).join("");
 
       const list = filteredDays();
-      document.getElementById("pills").innerHTML = list.map((d) => {
-        const t = dayTotalUsd(d);
-        return `<button type="button" class="pill ${selectedId === d.id ? "active" : ""} ${d.actionKind === "book" ? "book" : ""}" data-id="${d.id}">
-          ${escapeHtml(d.date)} · ${formatUsdRange(t.min, t.max)}
-        </button>`;
-      }).join("");
-
-      const selected = days.find((d) => d.id === selectedId) || days[1];
-      document.getElementById("focus").innerHTML = dayCard(selected);
-      document.getElementById("all").innerHTML = list.map((d) => dayCard(d, { compact: true })).join("");
+      document.getElementById("all").innerHTML = list.map((d) => dayCard(d)).join("");
       wireTips();
       requestAnimationFrame(() => initMaps());
     }
@@ -1001,21 +974,6 @@
       const list = filteredDays();
       if (!list.some((d) => d.id === selectedId) && list[0]) selectedId = list[0].id;
       render();
-    });
-    document.getElementById("pills").addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-id]");
-      if (!btn) return;
-      selectedId = btn.dataset.id;
-      render();
-      document.getElementById("focus").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    document.getElementById("prev").addEventListener("click", () => {
-      const i = window.DAYS.findIndex((d) => d.id === selectedId);
-      if (i > 0) { selectedId = window.DAYS[i - 1].id; filter = "all"; render(); }
-    });
-    document.getElementById("next").addEventListener("click", () => {
-      const i = window.DAYS.findIndex((d) => d.id === selectedId);
-      if (i < window.DAYS.length - 1) { selectedId = window.DAYS[i + 1].id; filter = "all"; render(); }
     });
 
     function unlock() {
