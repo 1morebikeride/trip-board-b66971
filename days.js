@@ -40,7 +40,8 @@ window.DAYS = [
           "note": "Gate walk / security"
         },
         "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Airplane snacks"
+        "imageAlt": "Airplane snacks",
+        "url": "https://www.united.com/en/us"
       }
     ]
   },
@@ -645,7 +646,8 @@ window.DAYS = [
           "note": "Gion → Pontocho/Kawaramachi"
         },
         "image": "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Casual dinner near river"
+        "imageAlt": "Casual dinner near river",
+        "url": "https://www.japan-guide.com/e/e3951.html"
       },
       {
         "name": "🍻 Soft Kiyamachi drinks",
@@ -1079,7 +1081,8 @@ window.DAYS = [
           "note": "Seongsu → Hongdae (~25–35 min)"
         },
         "image": "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Chi-maek or BBQ"
+        "imageAlt": "Chi-maek or BBQ",
+        "url": "https://english.visitkorea.or.kr/"
       },
       {
         "name": "🎉 Hongdae finale",
@@ -1093,7 +1096,8 @@ window.DAYS = [
           "note": "Same neighborhood"
         },
         "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Hongdae finale"
+        "imageAlt": "Hongdae finale",
+        "url": "https://english.visitkorea.or.kr/"
       },
       {
         "name": "🧖 Optional jjimjilbang",
