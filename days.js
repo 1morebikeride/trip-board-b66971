@@ -21,7 +21,7 @@ window.DAYS = [
         "cost": "Already booked",
         "excludeFromTotal": true,
         "blurb": "Clay UA803 IAD→HND · Tom UA79 · screenshot boarding passes.",
-        "url": "https://www.united.com/",
+        "url": "https://www.united.com/en/us",
         "lat": 38.9531,
         "lng": -77.4565,
         "travelFromPrev": null
@@ -81,7 +81,7 @@ window.DAYS = [
         "name": "Keikyu/train to Shibuya hostel",
         "cost": "¥500–800 (~$3–5)",
         "blurb": "Keikyu Airport Line into the city; Suica/Pasmo.",
-        "url": "https://www.japan-guide.com/e/e2170.html",
+        "url": "https://www.japan-guide.com/e/e2430.html",
         "lat": 35.662,
         "lng": 139.6982,
         "travelFromPrev": {
@@ -94,7 +94,7 @@ window.DAYS = [
         "name": "Omoide Yokocho yakitori",
         "cost": "¥3–5k (~$19–32)",
         "blurb": "Alley under Shinjuku tracks; point at the grill.",
-        "url": "https://www.japan-guide.com/e/e3035.html",
+        "url": "https://www.japan-guide.com/e/e3075.html",
         "lat": 35.6938,
         "lng": 139.6994,
         "travelFromPrev": {
@@ -107,7 +107,7 @@ window.DAYS = [
         "name": "Golden Gai bar hop",
         "cost": "¥3–6k (~$19–38)",
         "blurb": "Tiny bars; cover normal. Skip Kabukicho touts.",
-        "url": "https://www.japan-guide.com/e/e3034_golden_gai.html",
+        "url": "https://www.japan-guide.com/e/e3011.html",
         "lat": 35.6939,
         "lng": 139.7046,
         "travelFromPrev": {
@@ -141,11 +141,11 @@ window.DAYS = [
       },
       {
         "name": "Yakiniku reservation (TableCheck)",
-        "url": "https://www.tablecheck.com/en/shops/search?term=yakiniku%20shinjuku"
+        "url": "https://www.tablecheck.com/en/japan"
       },
       {
         "name": "Jojoen (yakiniku chain) booking",
-        "url": "https://www.jo-joen.co.jp/en/"
+        "url": "https://www.jojoen.co.jp/"
       }
     ],
     "activities": [
@@ -385,7 +385,7 @@ window.DAYS = [
     "book": [
       {
         "name": "Okonomiyaki / wagyu dinner (TableCheck)",
-        "url": "https://www.tablecheck.com/en/shops/search?term=okonomiyaki%20osaka"
+        "url": "https://www.tablecheck.com/en/japan"
       }
     ],
     "activities": [
@@ -450,7 +450,7 @@ window.DAYS = [
     "location": "Central Kyoto — Nishiki / Pontocho",
     "stay": "The Ritz-Carlton, Kyoto",
     "stayDetail": "Confirmed · Sept 2–7 · finish points/NUA booking",
-    "stayUrl": "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    "stayUrl": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
     "stayUsdMin": 0,
     "stayUsdMax": 0,
     "stayCostNote": "Ritz on points — $0 cash",
@@ -458,11 +458,11 @@ window.DAYS = [
     "book": [
       {
         "name": "Ritz-Carlton Kyoto (points / Marriott)",
-        "url": "https://www.ritzcarlton.com/en/hotels/kyoto/"
+        "url": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/"
       },
       {
         "name": "Pontocho dinner (TableCheck)",
-        "url": "https://www.tablecheck.com/en/shops/search?term=pontocho"
+        "url": "https://www.tablecheck.com/en/japan"
       },
       {
         "name": "Pontocho Robin example",
@@ -474,7 +474,7 @@ window.DAYS = [
         "name": "JR Osaka → Kyoto Station",
         "cost": "¥560–1,500 (~$4–10)",
         "blurb": "Special Rapid ~15–30 min.",
-        "url": "https://www.japan-guide.com/e/e2359_004.html",
+        "url": "https://www.japan-guide.com/e/e2363.html",
         "lat": 34.9858,
         "lng": 135.7588,
         "travelFromPrev": null
@@ -483,7 +483,7 @@ window.DAYS = [
         "name": "Ritz-Carlton check-in",
         "cost": "Points",
         "blurb": "On the Kamo River — soft arrival afternoon.",
-        "url": "https://www.ritzcarlton.com/en/hotels/kyoto/",
+        "url": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
         "lat": 35.0135,
         "lng": 135.771,
         "travelFromPrev": {
@@ -539,12 +539,12 @@ window.DAYS = [
     "weekday": "Thu",
     "city": "kyoto",
     "title": "Kiyomizu → Gion",
-    "image": "https://images.unsplash.com/photo-1478436127897-764b39ea4fe2?auto=format&fit=crop&w=900&q=80",
+    "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=900&q=80",
     "imageAlt": "Kyoto temples",
     "location": "East Kyoto / Higashiyama",
     "stay": "The Ritz-Carlton, Kyoto",
     "stayDetail": "Same",
-    "stayUrl": "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    "stayUrl": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
     "stayUsdMin": 0,
     "stayUsdMax": 0,
     "stayCostNote": "Ritz on points — $0 cash",
@@ -611,7 +611,7 @@ window.DAYS = [
     "location": "South Kyoto — Inari / Fushimi",
     "stay": "The Ritz-Carlton, Kyoto",
     "stayDetail": "Same",
-    "stayUrl": "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    "stayUrl": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
     "stayUsdMin": 0,
     "stayUsdMax": 0,
     "stayCostNote": "Ritz on points — $0 cash",
@@ -666,7 +666,7 @@ window.DAYS = [
     "location": "West Kyoto — Arashiyama",
     "stay": "The Ritz-Carlton, Kyoto",
     "stayDetail": "Same",
-    "stayUrl": "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    "stayUrl": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
     "stayUsdMin": 0,
     "stayUsdMax": 0,
     "stayCostNote": "Ritz on points — $0 cash",
@@ -674,7 +674,7 @@ window.DAYS = [
     "book": [
       {
         "name": "Ask Ritz concierge — Sept 5 nice dinner",
-        "url": "https://www.ritzcarlton.com/en/hotels/kyoto/dining/"
+        "url": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/dining/"
       }
     ],
     "activities": [
@@ -717,7 +717,7 @@ window.DAYS = [
         "name": "Ritz / kaiseki dinner",
         "cost": "¥15–30k (~$95–190)",
         "blurb": "Trip splurge — concierge books this.",
-        "url": "https://www.ritzcarlton.com/en/hotels/kyoto/dining/",
+        "url": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/dining/",
         "lat": 35.0135,
         "lng": 135.771,
         "travelFromPrev": {
@@ -739,7 +739,7 @@ window.DAYS = [
     "location": "North Kyoto · Nara · or hotel",
     "stay": "The Ritz-Carlton, Kyoto",
     "stayDetail": "Last Kyoto night",
-    "stayUrl": "https://www.ritzcarlton.com/en/hotels/kyoto/",
+    "stayUrl": "https://www.ritzcarlton.com/en/hotels/ukyrz-the-ritz-carlton-kyoto/overview/",
     "stayUsdMin": 0,
     "stayUsdMax": 0,
     "stayCostNote": "Ritz on points — $0 cash",
@@ -824,7 +824,7 @@ window.DAYS = [
         "name": "Haruka to KIX",
         "cost": "¥3–4k (~$19–25)",
         "blurb": "Reserved-seat airport express from Kyoto.",
-        "url": "https://www.japan-guide.com/e/e2359_004.html",
+        "url": "https://www.japan-guide.com/e/e2363.html",
         "lat": 34.4347,
         "lng": 135.244,
         "travelFromPrev": null
@@ -847,7 +847,7 @@ window.DAYS = [
         "name": "AREX to Hongik Univ",
         "cost": "₩10–20k (~$7–14)",
         "blurb": "Airport Railroad to Hongdae.",
-        "url": "https://www.arex.or.kr/eng/",
+        "url": "https://www.airportrailroad.com/intro",
         "lat": 37.5563,
         "lng": 126.9236,
         "travelFromPrev": {
@@ -893,7 +893,7 @@ window.DAYS = [
         "name": "Gyeongbokgung",
         "cost": "₩3,000 (~$2)",
         "blurb": "Main palace — guard ceremony if timing hits.",
-        "url": "https://www.royalpalace.go.kr/",
+        "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=87740",
         "lat": 37.5796,
         "lng": 126.977,
         "travelFromPrev": null
@@ -960,7 +960,7 @@ window.DAYS = [
         "name": "Seongsu cafes (or COEX alt)",
         "cost": "Café ₩8–15k (~$6–11) / COEX free",
         "blurb": "Pick one modern cluster.",
-        "url": "https://www.starfield.co.kr/coexmall/library",
+        "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=60729",
         "lat": 37.5445,
         "lng": 127.0557,
         "travelFromPrev": null
@@ -1039,7 +1039,7 @@ window.DAYS = [
         "name": "AREX to ICN",
         "cost": "₩10–20k (~$7–14)",
         "blurb": "From Hongik to Incheon Airport.",
-        "url": "https://www.arex.or.kr/eng/",
+        "url": "https://www.airportrailroad.com/intro",
         "lat": 37.4602,
         "lng": 126.4407,
         "travelFromPrev": null
@@ -1095,7 +1095,7 @@ window.DAYS = [
       },
       {
         "name": "Online check-in — Tom UA78",
-        "url": "https://www.united.com/"
+        "url": "https://www.united.com/en/us"
       }
     ],
     "activities": [
