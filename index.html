@@ -120,6 +120,10 @@
       background: #1a1f2a;
       z-index: 1;
     }
+    .map.map-compact {
+      height: 300px;
+      min-height: 300px;
+    }
     .map-tour {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 12px;
@@ -382,7 +386,7 @@
         </div>
         ${compact ? "" : `<img class="hero" src="${day.image}" alt="${escapeHtml(day.imageAlt)}" loading="lazy" />`}
         <div class="map-wrap">
-          <div class="map" id="${mapId}" data-day-id="${day.id}"></div>
+          <div class="map${compact ? " map-compact" : ""}" id="${mapId}" data-day-id="${day.id}"></div>
           <div class="map-tour" data-map-id="${mapId}">
             <button type="button" class="map-prev" aria-label="Previous activity">◀</button>
             <div class="map-tour-label">
@@ -599,12 +603,22 @@
         }
         // Start on full-day overview (all pins in view); ▶ walks 1 → 2 → …
         setMapStep(el.id, -1);
-        setTimeout(() => {
-          map.invalidateSize();
-          if (mapTours.get(el.id)?.index === -1) {
-            map.fitBounds(latlngs, { padding: [40, 40], maxZoom: 14, animate: false });
+      });
+
+      // Leaflet needs a post-layout invalidate when many maps mount at once
+      const refresh = () => {
+        maps.forEach((map, id) => {
+          map.invalidateSize({ animate: false });
+          const tour = mapTours.get(id);
+          if (tour && tour.index < 0 && tour.latlngs?.length) {
+            map.fitBounds(tour.latlngs, { padding: [32, 32], maxZoom: 14, animate: false });
           }
-        }, 80);
+        });
+      };
+      requestAnimationFrame(() => {
+        refresh();
+        setTimeout(refresh, 150);
+        setTimeout(refresh, 500);
       });
     }
 
