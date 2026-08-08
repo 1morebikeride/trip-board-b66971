@@ -263,6 +263,11 @@
       <div class="banner">
         Book first: hostels + Ritz + KIX→ICN + ICN→HND. Yellow days need bookings — links are on each day.
       </div>
+      <div class="banner" style="background:#16251c;border-color:#2f5a3d;color:#b7e0c2">
+        <strong>Pre-trip must-dos:</strong> Clay — submit foreign travel to FSO/security <em>before</em> departure ·
+        Japan: Visit Japan Web (optional QR) · Korea: e-Arrival Card ≤3 days before landing (K-ETA not required for US through end of 2026) ·
+        Full checklist lives in the repo <code>checklist.md</code>.
+      </div>
       <div class="filters" id="filters"></div>
       <div class="pill-row" id="pills"></div>
       <div class="day-nav">
@@ -339,7 +344,7 @@
     }
 
     function tipHtml(blurb) {
-      return `<span class="tip"><button type="button" class="tip-btn" aria-label="More info">?</button><span class="bubble">${escapeHtml(blurb)}</span></span>`;
+      return `<button type="button" class="tip-btn" aria-label="More info">?</button><span class="bubble">${escapeHtml(blurb)}</span>`;
     }
 
     function activityBlock(a, idx) {
@@ -629,7 +634,7 @@
       return window.DAYS.filter((d) => filter === "all" || d.city === filter);
     }
 
-    function placeBubble(tip) {
+    function placeBubble(tip, { show = true } = {}) {
       const btn = tip.querySelector(".tip-btn");
       const bubble = tip.querySelector(".bubble");
       if (!btn || !bubble) return;
@@ -637,7 +642,7 @@
       const pad = 12;
       const maxW = Math.min(340, window.innerWidth - pad * 2);
       bubble.style.maxWidth = maxW + "px";
-      // measure after making measurable
+      // Measure while invisible, then show if requested
       bubble.style.visibility = "hidden";
       bubble.style.opacity = "0";
       bubble.style.left = "0px";
@@ -651,20 +656,39 @@
       if (top < pad) top = r.bottom + 10;
       bubble.style.left = left + "px";
       bubble.style.top = top + "px";
+      if (show) {
+        bubble.style.visibility = "visible";
+        bubble.style.opacity = "1";
+      }
+    }
+
+    function hideBubble(tip) {
+      const bubble = tip.querySelector(".bubble");
+      if (!bubble) return;
+      if (!tip.classList.contains("open")) {
+        bubble.style.visibility = "hidden";
+        bubble.style.opacity = "0";
+      }
     }
 
     function wireTips() {
       document.querySelectorAll(".tip").forEach((tip) => {
-        const show = () => { placeBubble(tip); };
-        tip.addEventListener("mouseenter", show);
-        tip.addEventListener("focusin", show);
+        tip.addEventListener("mouseenter", () => placeBubble(tip, { show: true }));
+        tip.addEventListener("mouseleave", () => hideBubble(tip));
+        tip.addEventListener("focusin", () => placeBubble(tip, { show: true }));
+        tip.addEventListener("focusout", (e) => {
+          if (!tip.contains(e.relatedTarget)) hideBubble(tip);
+        });
         tip.querySelector(".tip-btn")?.addEventListener("click", (e) => {
           e.preventDefault(); e.stopPropagation();
           const open = tip.classList.contains("open");
-          document.querySelectorAll(".tip.open").forEach((t) => t.classList.remove("open"));
+          document.querySelectorAll(".tip.open").forEach((t) => {
+            t.classList.remove("open");
+            hideBubble(t);
+          });
           if (!open) {
             tip.classList.add("open");
-            placeBubble(tip);
+            placeBubble(tip, { show: true });
           }
         });
       });

@@ -141,7 +141,7 @@ window.DAYS = [
     "imageAlt": "Shibuya scramble",
     "location": "Meiji → Harajuku → Shibuya (walkable)",
     "stay": "The Millennials Shibuya",
-    "stayDetail": "Same hostel — stumble home after karaoke/club",
+    "stayDetail": "Same hostel — stumble home after arcades/club",
     "stayUrl": "https://www.hostelworld.com/hostels/p/285601/the-millennials-shibuya/",
     "stayUsdMin": 38,
     "stayUsdMax": 57,
@@ -204,10 +204,10 @@ window.DAYS = [
         "imageAlt": "Yakiniku dinner"
       },
       {
-        "name": "🎤 Karaoke Shibuya",
-        "cost": "¥2–4k (~$13–25)",
-        "blurb": "Private room + nomihodai. Big Echo / Karaoke Kan.",
-        "url": "https://www.japan-guide.com/e/e2369.html",
+        "name": "🕹️ Arcades + standing bars",
+        "cost": "¥2–5k (~$13–32)",
+        "blurb": "Round1 / Hi-Tech dens, then Nonbei Yokocho standing drinks — denser vibe than karaoke.",
+        "url": "https://www.japan-guide.com/e/e3006.html",
         "lat": 35.66,
         "lng": 139.6985,
         "travelFromPrev": {
@@ -215,8 +215,8 @@ window.DAYS = [
           "min": 15,
           "note": "Back to Shibuya"
         },
-        "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Karaoke Shibuya"
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Arcades"
       },
       {
         "name": "🪩 Optional club (ATOM/Womb)",
@@ -389,10 +389,10 @@ window.DAYS = [
         "imageAlt": "Dotonbori street food"
       },
       {
-        "name": "🎮 Gaming bar + karaoke",
-        "cost": "¥3–6k (~$19–38)",
-        "blurb": "Retro gaming bars + karaoke until late.",
-        "url": "https://www.japan-guide.com/e/e2369.html",
+        "name": "🕹️ Retro gaming bars",
+        "cost": "¥2–5k (~$13–32)",
+        "blurb": "Space Station-style bars — buy a drink, play forever. No karaoke needed.",
+        "url": "https://www.japan-guide.com/e/e4014.html",
         "lat": 34.6705,
         "lng": 135.5,
         "travelFromPrev": {
@@ -401,7 +401,7 @@ window.DAYS = [
           "note": "Stay in Minami alleys"
         },
         "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Gaming bar + karaoke"
+        "imageAlt": "Gaming bars"
       }
     ]
   },
@@ -711,10 +711,10 @@ window.DAYS = [
         "imageAlt": "Optional Fushimi sake tasting"
       },
       {
-        "name": "🎤 Dinner + karaoke night",
+        "name": "🍻 Dinner + Kiyamachi crawl",
         "cost": "¥5–10k (~$32–63)",
-        "blurb": "Back to central Kyoto for bigger night.",
-        "url": "https://www.japan-guide.com/e/e2369.html",
+        "blurb": "Eat near the river, then hop tiny Kiyamachi/Pontocho bars until late.",
+        "url": "https://www.japan-guide.com/e/e3951.html",
         "lat": 35.004,
         "lng": 135.7705,
         "travelFromPrev": {
@@ -722,8 +722,8 @@ window.DAYS = [
           "min": 25,
           "note": "Return to Kawaramachi/Kiyamachi"
         },
-        "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Dinner + karaoke night"
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Kiyamachi bars"
       }
     ]
   },
@@ -1025,9 +1025,9 @@ window.DAYS = [
         "imageAlt": "Gwangjang Market"
       },
       {
-        "name": "🎤 Hongdae noraebang + bars",
-        "cost": "₩20–40k (~$14–28)",
-        "blurb": "Private karaoke then nightlife. Start late.",
+        "name": "🍺 Pojangmacha + Hongdae clubs",
+        "cost": "₩40–80k (~$28–57)",
+        "blurb": "Tent bars / street drinking, then Hongdae clubs when the streets fill after 11.",
         "url": "https://english.visitkorea.or.kr/",
         "lat": 37.5563,
         "lng": 126.9236,
@@ -1037,7 +1037,7 @@ window.DAYS = [
           "note": "Metro back to Hongdae (~20–30 min)"
         },
         "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=640&q=80",
-        "imageAlt": "Hongdae noraebang + bars"
+        "imageAlt": "Hongdae nightlife"
       }
     ]
   },
