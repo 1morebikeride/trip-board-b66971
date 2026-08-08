@@ -254,7 +254,7 @@
       <h2 style="margin-top:28px">All days</h2>
       <div class="grid-all" id="all"></div>
       <footer>
-        Numbers on the map match activity numbers. Use ◀ ▶ under each map to step through stops.
+        Numbers on the map match activity numbers. Each day starts in full overview — use ◀ ▶ under that day’s map to walk stops in order.
         Travel times are door-to-door estimates. Hover/tap <strong>?</strong> for details. FX ~¥158/$ · ~₩1,407/$.
       </footer>
     </div>
@@ -428,27 +428,42 @@
     function setMapStep(mapId, index) {
       const tour = mapTours.get(mapId);
       if (!tour) return;
-      const i = Math.max(0, Math.min(index, tour.pts.length - 1));
+      // -1 = full-day overview; 0..n-1 = activity focus
+      const i = Math.max(-1, Math.min(index, tour.pts.length - 1));
       tour.index = i;
-      const a = tour.pts[i];
-      const n = tour.nums[i];
 
       tour.markers.forEach((m, mi) => {
         const el = m.getElement()?.querySelector(".num-marker");
         if (el) el.classList.toggle("active", mi === i);
+        if (i < 0) m.closePopup();
       });
 
       const label = document.querySelector(`.map-tour[data-map-id="${mapId}"]`);
       if (label) {
-        label.querySelector(".map-step-title").textContent = `${n}. ${a.name}`;
-        const travel = a.travelFromPrev
-          ? `${modeLabel(a.travelFromPrev.mode)} ~${a.travelFromPrev.min} min from previous`
-          : (i === 0 ? "Start of the day" : "");
-        label.querySelector(".map-step-meta").textContent = `${i + 1} / ${tour.pts.length}${travel ? " · " + travel : ""}`;
-        label.querySelector(".map-prev").disabled = i <= 0;
+        if (i < 0) {
+          label.querySelector(".map-step-title").textContent = `Full day · ${tour.pts.length} stops`;
+          label.querySelector(".map-step-meta").textContent = "Overview — hit ▶ to start at activity 1";
+        } else {
+          const a = tour.pts[i];
+          const n = tour.nums[i];
+          label.querySelector(".map-step-title").textContent = `${n}. ${a.name}`;
+          const travel = a.travelFromPrev
+            ? `${modeLabel(a.travelFromPrev.mode)} ~${a.travelFromPrev.min} min from previous`
+            : "First stop";
+          label.querySelector(".map-step-meta").textContent =
+            `Stop ${i + 1} of ${tour.pts.length}${travel ? " · " + travel : ""}`;
+        }
+        label.querySelector(".map-prev").disabled = i < 0;
         label.querySelector(".map-next").disabled = i >= tour.pts.length - 1;
       }
 
+      if (i < 0) {
+        tour.map.closePopup();
+        tour.map.fitBounds(tour.latlngs, { padding: [36, 36], maxZoom: 14, animate: true });
+        return;
+      }
+
+      const a = tour.pts[i];
       tour.map.flyTo([a.lat, a.lng], Math.max(tour.map.getZoom(), 13), { duration: 0.45 });
       tour.markers[i].openPopup();
     }
@@ -489,12 +504,11 @@
 
           for (let i = 0; i < latlngs.length - 1; i++) {
             const a = latlngs[i], b = latlngs[i + 1];
-            // skip tiny hops that would stack arrows
             const dist = map.distance(a, b);
             if (dist < 80) continue;
             const mid = midpoint(a, b);
             const deg = bearingDeg(a, b);
-            const arrow = L.marker(mid, {
+            L.marker(mid, {
               interactive: false,
               keyboard: false,
               icon: L.divIcon({
@@ -523,13 +537,16 @@
 
         map.fitBounds(latlngs, { padding: [36, 36], maxZoom: 14 });
         maps.set(el.id, map);
-        mapTours.set(el.id, { map, pts, markers, nums, index: 0 });
+        mapTours.set(el.id, { map, pts, markers, nums, latlngs, index: -1 });
 
         if (controls) {
-          controls.querySelector(".map-prev").onclick = () => setMapStep(el.id, mapTours.get(el.id).index - 1);
-          controls.querySelector(".map-next").onclick = () => setMapStep(el.id, mapTours.get(el.id).index + 1);
+          controls.querySelector(".map-prev").onclick = () =>
+            setMapStep(el.id, mapTours.get(el.id).index - 1);
+          controls.querySelector(".map-next").onclick = () =>
+            setMapStep(el.id, mapTours.get(el.id).index + 1);
         }
-        setMapStep(el.id, 0);
+        // Start on full-day overview; ▶ walks 1 → 2 → …
+        setMapStep(el.id, -1);
         setTimeout(() => map.invalidateSize(), 50);
       });
     }
