@@ -24,7 +24,9 @@ window.DAYS = [
         "url": "https://www.united.com/en/us",
         "lat": 38.9531,
         "lng": -77.4565,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Airport check-in / depart"
       },
       {
         "name": "🍫 Airplane snacks",
@@ -36,7 +38,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 10,
           "note": "Gate walk / security"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Airplane snacks"
       }
     ]
   },
@@ -75,7 +79,9 @@ window.DAYS = [
         "url": "https://tokyo-haneda.com/en/",
         "lat": 35.5494,
         "lng": 139.7798,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Land Haneda (HND)"
       },
       {
         "name": "🚆 Keikyu/train to Shibuya hostel",
@@ -88,7 +94,9 @@ window.DAYS = [
           "mode": "train",
           "min": 35,
           "note": "HND → Shibuya (~30–40 min)"
-        }
+        },
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo_Shibuya_Scramble_Crossing_2018-10-09.jpg?width=640",
+        "imageAlt": "Keikyu/train to Shibuya hostel"
       },
       {
         "name": "🍢 Omoide Yokocho yakitori",
@@ -101,7 +109,9 @@ window.DAYS = [
           "mode": "train",
           "min": 15,
           "note": "Shibuya → Shinjuku JR Yamanote"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Omoide Yokocho yakitori"
       },
       {
         "name": "🍻 Golden Gai bar hop",
@@ -114,7 +124,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 5,
           "note": "Walk from Omoide Yokocho"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Golden Gai bar hop"
       }
     ]
   },
@@ -156,7 +168,9 @@ window.DAYS = [
         "url": "https://www.meijijingu.or.jp/en/",
         "lat": 35.6764,
         "lng": 139.6993,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Meiji Shrine + Yoyogi"
       },
       {
         "name": "🏙️ Shibuya Sky",
@@ -169,7 +183,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 25,
           "note": "Walk Harajuku/Omotesando → Scramble (~20–30 min)"
-        }
+        },
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo_Shibuya_Scramble_Crossing_2018-10-09.jpg?width=640",
+        "imageAlt": "Shibuya Sky"
       },
       {
         "name": "🥩 Yakiniku dinner",
@@ -182,7 +198,9 @@ window.DAYS = [
           "mode": "train",
           "min": 15,
           "note": "Shibuya → Shinjuku for dinner"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Yakiniku dinner"
       },
       {
         "name": "🎤 Karaoke Shibuya",
@@ -195,7 +213,9 @@ window.DAYS = [
           "mode": "train",
           "min": 15,
           "note": "Back to Shibuya"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Karaoke Shibuya"
       },
       {
         "name": "🪩 Optional club (ATOM/Womb)",
@@ -208,7 +228,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 8,
           "note": "Walk up Dogenzaka"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Optional club (ATOM/Womb)"
       }
     ]
   },
@@ -242,7 +264,9 @@ window.DAYS = [
         "url": "https://www.senso-ji.jp/english/",
         "lat": 35.7148,
         "lng": 139.7967,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Senso-ji (Asakusa)"
       },
       {
         "name": "🌌 teamLab Planets",
@@ -255,7 +279,9 @@ window.DAYS = [
           "mode": "train",
           "min": 45,
           "note": "Asakusa → Toyosu/Shin-Toyosu (~40–50 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "teamLab Planets"
       },
       {
         "name": "🍣 Standing sushi / casual dinner",
@@ -268,7 +294,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 10,
           "note": "Walk Toyosu area"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Standing sushi / casual dinner"
       },
       {
         "name": "🌃 Soft Shinjuku night",
@@ -281,7 +309,9 @@ window.DAYS = [
           "mode": "train",
           "min": 35,
           "note": "Toyosu corridor → Shinjuku"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Soft Shinjuku night"
       }
     ]
   },
@@ -323,7 +353,9 @@ window.DAYS = [
         "url": "https://www.japan-guide.com/e/e2018.html",
         "lat": 35.6812,
         "lng": 139.7671,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Tokyo Station → Nozomi Shinkansen"
       },
       {
         "name": "🏨 Arrive Shin-Osaka → Shinsaibashi hostel",
@@ -336,7 +368,9 @@ window.DAYS = [
           "mode": "train",
           "min": 160,
           "note": "Shinkansen ~2.5h + metro ~15 min"
-        }
+        },
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Dotonbori_Canal_1.jpg?width=640",
+        "imageAlt": "Arrive Shin-Osaka → Shinsaibashi hostel"
       },
       {
         "name": "🍜 Dotonbori street food",
@@ -349,7 +383,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 8,
           "note": "Walk from Shinsaibashi"
-        }
+        },
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Dotonbori_Canal_1.jpg?width=640",
+        "imageAlt": "Dotonbori street food"
       },
       {
         "name": "🎮 Gaming bar + karaoke",
@@ -362,7 +398,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 5,
           "note": "Stay in Minami alleys"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Gaming bar + karaoke"
       }
     ]
   },
@@ -396,7 +434,9 @@ window.DAYS = [
         "url": "https://www.japan-guide.com/e/e4027.html",
         "lat": 34.659,
         "lng": 135.5064,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Kuromon Market"
       },
       {
         "name": "🛹 Amerikamura",
@@ -409,7 +449,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 20,
           "note": "Walk via Namba/Shinsaibashi (~15–25 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Amerikamura"
       },
       {
         "name": "🗼 Shinsekai / Tsutenkaku",
@@ -422,7 +464,9 @@ window.DAYS = [
           "mode": "train",
           "min": 15,
           "note": "Metro/walk south to Shinsekai"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Shinsekai / Tsutenkaku"
       },
       {
         "name": "🍽️ Nice Osaka dinner",
@@ -435,7 +479,9 @@ window.DAYS = [
           "mode": "train",
           "min": 12,
           "note": "Back toward Dotonbori/Namba"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Nice Osaka dinner"
       }
     ]
   },
@@ -477,7 +523,9 @@ window.DAYS = [
         "url": "https://www.japan-guide.com/e/e2363.html",
         "lat": 34.9858,
         "lng": 135.7588,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "JR Osaka → Kyoto Station"
       },
       {
         "name": "🛎️ Ritz-Carlton check-in",
@@ -490,7 +538,9 @@ window.DAYS = [
           "mode": "taxi",
           "min": 15,
           "note": "Taxi/bus from Kyoto Station (~10–20 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Ritz-Carlton check-in"
       },
       {
         "name": "🥒 Nishiki Market",
@@ -503,7 +553,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 15,
           "note": "Walk toward downtown"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Nishiki Market"
       },
       {
         "name": "🏮 Pontocho dinner",
@@ -516,7 +568,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 8,
           "note": "Walk Nishiki → Pontocho"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Pontocho dinner"
       },
       {
         "name": "🍻 Kiyamachi drinks",
@@ -529,7 +583,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 3,
           "note": "Next street over"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Kiyamachi drinks"
       }
     ]
   },
@@ -558,7 +614,9 @@ window.DAYS = [
         "url": "https://www.kiyomizudera.or.jp/en/",
         "lat": 34.9949,
         "lng": 135.785,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Kiyomizu-dera_in_Kyoto-r.jpg?width=640",
+        "imageAlt": "Kiyomizu-dera"
       },
       {
         "name": "👘 Sannenzaka → Gion",
@@ -571,7 +629,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 25,
           "note": "Walk downhill Sannenzaka → Gion (~20–30 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Sannenzaka → Gion"
       },
       {
         "name": "🍽️ Casual dinner near river",
@@ -583,7 +643,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 10,
           "note": "Gion → Pontocho/Kawaramachi"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Casual dinner near river"
       },
       {
         "name": "🍻 Soft Kiyamachi drinks",
@@ -596,7 +658,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 3,
           "note": "Same nightlife cluster"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Soft Kiyamachi drinks"
       }
     ]
   },
@@ -625,7 +689,9 @@ window.DAYS = [
         "url": "https://inari.jp/en/",
         "lat": 34.9671,
         "lng": 135.7727,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg?width=640",
+        "imageAlt": "Fushimi Inari hike"
       },
       {
         "name": "🍶 Optional Fushimi sake tasting",
@@ -638,7 +704,9 @@ window.DAYS = [
           "mode": "train",
           "min": 15,
           "note": "JR/walk into Fushimi sake area"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Optional Fushimi sake tasting"
       },
       {
         "name": "🎤 Dinner + karaoke night",
@@ -651,7 +719,9 @@ window.DAYS = [
           "mode": "train",
           "min": 25,
           "note": "Return to Kawaramachi/Kiyamachi"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Dinner + karaoke night"
       }
     ]
   },
@@ -685,7 +755,9 @@ window.DAYS = [
         "url": "https://www.japan-guide.com/e/e3910.html",
         "lat": 35.017,
         "lng": 135.672,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Arashiyama Bamboo Grove"
       },
       {
         "name": "🏯 Tenryu-ji garden",
@@ -698,7 +770,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 5,
           "note": "Adjacent to bamboo grove"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Tenryu-ji garden"
       },
       {
         "name": "🐵 Optional monkey park",
@@ -711,7 +785,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 15,
           "note": "Walk + hike up (~15–25 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Optional monkey park"
       },
       {
         "name": "🍱 Ritz / kaiseki dinner",
@@ -724,7 +800,9 @@ window.DAYS = [
           "mode": "train",
           "min": 40,
           "note": "Arashiyama → hotel (~35–50 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Ritz / kaiseki dinner"
       }
     ]
   },
@@ -758,7 +836,9 @@ window.DAYS = [
         "url": "https://www.shokoku-ji.jp/en/kinkakuji/",
         "lat": 35.0394,
         "lng": 135.7292,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "A) Kinkaku-ji"
       },
       {
         "name": "🦌 B) Nara day trip (alt)",
@@ -772,7 +852,9 @@ window.DAYS = [
           "mode": "train",
           "min": 50,
           "note": "Kyoto → Nara JR (~45–60 min) — ALT only"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "B) Nara day trip (alt)"
       },
       {
         "name": "🍶 Last Kyoto dinner + drinks",
@@ -785,7 +867,9 @@ window.DAYS = [
           "mode": "taxi",
           "min": 25,
           "note": "From Kinkaku-ji area back to center (or from Nara ~50 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Last Kyoto dinner + drinks"
       }
     ]
   },
@@ -827,7 +911,9 @@ window.DAYS = [
         "url": "https://www.japan-guide.com/e/e2363.html",
         "lat": 34.4347,
         "lng": 135.244,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Haruka to KIX"
       },
       {
         "name": "✈️ Fly to ICN",
@@ -841,7 +927,9 @@ window.DAYS = [
           "mode": "flight",
           "min": 110,
           "note": "Flight ~1.5–2h + airport time"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Fly to ICN"
       },
       {
         "name": "🚆 AREX to Hongik Univ",
@@ -854,7 +942,9 @@ window.DAYS = [
           "mode": "train",
           "min": 50,
           "note": "AREX ICN → Hongik (~45–60 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "AREX to Hongik Univ"
       },
       {
         "name": "🥩 Korean BBQ + soju",
@@ -867,7 +957,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 8,
           "note": "Walk to BBQ street"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Korean BBQ + soju"
       }
     ]
   },
@@ -896,7 +988,9 @@ window.DAYS = [
         "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=87740",
         "lat": 37.5796,
         "lng": 126.977,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1534274867514-d5b47ef89ed7?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Gyeongbokgung"
       },
       {
         "name": "🏘️ Bukchon / Ikseon",
@@ -909,7 +1003,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 15,
           "note": "Walk east to Bukchon (~10–20 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1534274867514-d5b47ef89ed7?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Bukchon / Ikseon"
       },
       {
         "name": "🥟 Gwangjang Market",
@@ -922,7 +1018,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 20,
           "note": "Walk/subway to Gwangjang"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Gwangjang Market"
       },
       {
         "name": "🎤 Hongdae noraebang + bars",
@@ -935,7 +1033,9 @@ window.DAYS = [
           "mode": "train",
           "min": 25,
           "note": "Metro back to Hongdae (~20–30 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Hongdae noraebang + bars"
       }
     ]
   },
@@ -963,7 +1063,9 @@ window.DAYS = [
         "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=60729",
         "lat": 37.5445,
         "lng": 127.0557,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Seongsu cafes (or COEX alt)"
       },
       {
         "name": "🍗 Chi-maek or BBQ",
@@ -975,7 +1077,9 @@ window.DAYS = [
           "mode": "train",
           "min": 30,
           "note": "Seongsu → Hongdae (~25–35 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Chi-maek or BBQ"
       },
       {
         "name": "🎉 Hongdae finale",
@@ -987,7 +1091,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 5,
           "note": "Same neighborhood"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Hongdae finale"
       },
       {
         "name": "🧖 Optional jjimjilbang",
@@ -1000,7 +1106,9 @@ window.DAYS = [
           "mode": "walk",
           "min": 10,
           "note": "Hongdae Bulgama area"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Optional jjimjilbang"
       }
     ]
   },
@@ -1042,7 +1150,9 @@ window.DAYS = [
         "url": "https://www.airportrailroad.com/intro",
         "lat": 37.4602,
         "lng": 126.4407,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "AREX to ICN"
       },
       {
         "name": "✈️ Fly ICN → HND",
@@ -1056,7 +1166,9 @@ window.DAYS = [
           "mode": "flight",
           "min": 150,
           "note": "Flight ~2–2.5h + airports"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Fly ICN → HND"
       },
       {
         "name": "🛏️ plat hostel Haneda",
@@ -1069,7 +1181,9 @@ window.DAYS = [
           "mode": "train",
           "min": 15,
           "note": "HND → Anamori-Inari (~10–15 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "plat hostel Haneda"
       }
     ]
   },
@@ -1107,7 +1221,9 @@ window.DAYS = [
         "url": "https://tokyo-haneda.com/en/",
         "lat": 35.5494,
         "lng": 139.7798,
-        "travelFromPrev": null
+        "travelFromPrev": null,
+        "image": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Clay: NH102 HND 10:20 → IAD"
       },
       {
         "name": "✈️ Tom: UA78 NRT 17:25 → EWR",
@@ -1121,7 +1237,9 @@ window.DAYS = [
           "mode": "train",
           "min": 90,
           "note": "Haneda area → Narita (~75–100 min)"
-        }
+        },
+        "image": "https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=640&q=80",
+        "imageAlt": "Tom: UA78 NRT 17:25 → EWR"
       }
     ]
   }

@@ -150,13 +150,22 @@
       background: #ffd166; transform: scale(1.2);
       box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.45), 0 2px 8px rgba(0,0,0,.4);
     }
-    .route-arrow {
-      width: 0; height: 0;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-bottom: 14px solid #6ea8fe;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));
+    .leaflet-popup-content {
+      margin: 10px 12px;
+      min-width: 200px;
+      max-width: 240px;
     }
+    .map-popup-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      margin-bottom: 8px;
+      background: #222;
+    }
+    .map-popup-title { font-weight: 700; font-size: 0.92rem; line-height: 1.3; }
+    .map-popup-blurb { color: #555; font-size: 0.8rem; line-height: 1.35; margin-top: 4px; }
 
     .card-body { padding: 16px; display: grid; gap: 14px; }
     .section-label {
@@ -415,8 +424,11 @@
       return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
     }
 
-    function midpoint(a, b) {
-      return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    function popupHtml(n, a) {
+      const img = a.image
+        ? `<img class="map-popup-img" src="${escapeHtml(a.image)}" alt="${escapeHtml(a.imageAlt || a.name)}" loading="lazy" />`
+        : "";
+      return `${img}<div class="map-popup-title">${n}. ${escapeHtml(a.name)}</div><div class="map-popup-blurb">${escapeHtml(a.blurb)}</div>`;
     }
 
     function destroyMaps() {
@@ -530,7 +542,7 @@
             iconAnchor: [14, 14],
           });
           const marker = L.marker([a.lat, a.lng], { icon }).addTo(map);
-          marker.bindPopup(`<strong>${n}. ${escapeHtml(a.name)}</strong><br>${escapeHtml(a.blurb)}`);
+          marker.bindPopup(popupHtml(n, a), { maxWidth: 260, minWidth: 200, autoPan: true });
           marker.on("click", () => setMapStep(el.id, i));
           markers.push(marker);
         });
