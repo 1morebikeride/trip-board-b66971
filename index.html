@@ -25,7 +25,12 @@
       line-height: 1.45;
     }
     a { color: var(--accent); }
-    .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px 80px; }
+    .wrap {
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      padding: 16px 12px 48px;
+    }
 
     #gate { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
     #gate.hidden, #app.hidden { display: none; }
@@ -49,6 +54,7 @@
     }
     .gate-error { color: #ff7b72; font-size: 0.9rem; min-height: 1.2em; }
 
+    header { text-align: center; }
     header h1 { margin: 0 0 6px; font-size: 1.75rem; }
     header p { margin: 0; color: var(--muted); }
 
@@ -189,11 +195,11 @@
     footer { margin-top: 28px; color: var(--muted); font-size: 0.85rem; }
 
     .timeline-panel {
-      margin: 18px 0 12px;
+      margin: 12px 0;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 14px 14px 16px;
+      padding: 12px;
     }
     .timeline-head {
       display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline;
@@ -229,7 +235,7 @@
     .tl-dates .tick strong { display: block; color: var(--text); font-weight: 700; font-size: 0.74rem; }
     .tl-dates .tick.active strong { color: var(--accent); }
 
-    .legs { display: grid; gap: 10px; margin-top: 4px; }
+    .legs { display: grid; gap: 8px; margin-top: 0; }
     .leg {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -239,8 +245,10 @@
     .leg > summary {
       list-style: none; cursor: pointer; user-select: none;
       display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-      padding: 14px 16px; background: var(--panel2);
+      padding: 12px 14px; background: var(--panel2);
+      border-bottom: 1px solid transparent;
     }
+    .leg[open] > summary { border-bottom-color: var(--line); }
     .leg > summary::-webkit-details-marker { display: none; }
     .leg .leg-swatch { width: 10px; height: 28px; border-radius: 999px; flex: 0 0 auto; }
     .leg.tokyo .leg-swatch { background: #6ea8fe; }
@@ -253,12 +261,26 @@
     .leg .leg-chev { margin-left: auto; color: var(--muted); font-size: 0.85rem; transition: transform .15s ease; }
     .leg[open] .leg-chev { transform: rotate(90deg); }
     .leg-days {
-      display: flex; gap: 12px; padding: 12px; overflow-x: auto;
-      align-items: stretch; border-top: 1px solid var(--line);
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      align-items: stretch;
+      width: 100%;
     }
-    .leg-days .card { flex: 1 1 0; min-width: min(280px, 78vw); }
+    .leg-days .card {
+      flex: 1 1 0;
+      min-width: 0;
+      width: 0; /* equal columns — force share of full row */
+    }
     .leg-days .card.active { outline: 2px solid var(--accent); outline-offset: 1px; }
     .leg.active-leg { border-color: #4a5568; }
+
+    /* Compact type when many days share one row */
+    .leg-days .card-head h2 { font-size: 0.82rem; }
+    .leg-days .hero { height: 96px; }
+    .leg-days .map { height: 180px; }
+    .leg-days .card-body { padding: 10px; gap: 10px; }
+    .leg-days .activity .blurb { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
     .todo-panel {
       margin: 0 0 14px;
