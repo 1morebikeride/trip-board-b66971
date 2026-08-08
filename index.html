@@ -61,9 +61,10 @@
     .card {
       background: var(--panel); border: 1px solid var(--line);
       border-radius: 12px; margin: 0; min-width: 0;
+      overflow: hidden;
     }
     .card-head:first-child { border-radius: 12px 12px 0 0; }
-    .hero { overflow: hidden; }
+    .hero, .map { overflow: hidden; }
     .card-head {
       display: flex; justify-content: space-between; gap: 8px; align-items: flex-start;
       padding: 12px; border-bottom: 1px solid var(--line); background: var(--panel2);
@@ -88,27 +89,19 @@
       position: relative;
       border-bottom: 1px solid var(--line);
       background: #1a1f2a;
-      overflow: visible;
-      z-index: 1;
-    }
-    .map-wrap:focus-within,
-    .map-wrap:has(.leaflet-popup) {
-      z-index: 5;
+      overflow: hidden;
     }
     .map {
       height: 220px;
       width: 100%;
       background: #1a1f2a;
       z-index: 1;
-      overflow: visible;
     }
     .map-tour {
       display: flex; align-items: center; gap: 8px;
       padding: 8px 10px;
       background: var(--panel2);
       border-top: 1px solid var(--line);
-      position: relative;
-      z-index: 0;
     }
     .map-tour button {
       border: 1px solid var(--line); background: var(--panel); color: var(--text);
@@ -120,18 +113,9 @@
     .map-tour-label { flex: 1; min-width: 0; font-size: 0.8rem; line-height: 1.3; }
     .map-tour-label strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .map-tour-label span { color: var(--muted); font-size: 0.72rem; }
-    .leaflet-container {
-      font: inherit;
-      background: #1a1f2a;
-      overflow: visible !important;
-    }
-    .leaflet-pane,
-    .leaflet-map-pane,
-    .leaflet-popup-pane {
-      overflow: visible !important;
-    }
-    .leaflet-popup { margin-bottom: 10px; }
-    .leaflet-popup-content-wrapper { border-radius: 10px; overflow: hidden; }
+    .leaflet-container { font: inherit; background: #1a1f2a; }
+    .leaflet-popup { margin-bottom: 8px; }
+    .leaflet-popup-content-wrapper { border-radius: 8px; }
     .num-marker {
       background: var(--accent); color: #081018; border: 2px solid #fff;
       border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center;
@@ -145,18 +129,15 @@
     }
     .leaflet-popup-content {
       margin: 6px 8px 8px;
-      min-width: 140px;
-      max-width: 170px;
+      min-width: 120px;
+      max-width: 150px;
     }
     .map-popup-img {
-      width: 100%; height: 56px; object-fit: cover; border-radius: 6px;
+      width: 100%; height: 48px; object-fit: cover; border-radius: 5px;
       display: block; margin-bottom: 4px; background: #222;
     }
-    .map-popup-title { font-weight: 700; font-size: 0.82rem; line-height: 1.25; }
-    .map-popup-blurb {
-      color: #555; font-size: 0.72rem; line-height: 1.3; margin-top: 3px;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-    }
+    .map-popup-title { font-weight: 700; font-size: 0.8rem; line-height: 1.25; }
+    .map-popup-blurb { display: none; }
     .map-popup-link { color: #1a5fb4; text-decoration: underline; }
     .map-popup-link:hover { color: #0b3d7a; }
 
@@ -266,7 +247,7 @@
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
-      overflow: visible;
+      overflow: hidden;
     }
     .leg > summary {
       list-style: none; cursor: pointer; user-select: none;
@@ -292,17 +273,15 @@
       padding: 8px;
       align-items: stretch;
       width: 100%;
-      overflow: visible;
+      overflow: hidden;
     }
     .leg-days .card {
       flex: 1 1 0;
       min-width: 0;
       width: 0;
-      overflow: visible;
+      overflow: hidden;
       position: relative;
-      z-index: 1;
     }
-    .leg-days .card:has(.leaflet-popup) { z-index: 8; }
     .leg-days .card.active { outline: 2px solid var(--accent); outline-offset: 1px; }
     .leg.active-leg { border-color: #4a5568; }
 
@@ -593,7 +572,7 @@
       const title = a.url
         ? `<a class="map-popup-link" href="${escapeHtml(a.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(a.name)}</a>`
         : escapeHtml(a.name);
-      return `${img}<div class="map-popup-title">${n}. ${title}</div><div class="map-popup-blurb">${escapeHtml(a.blurb)}</div>`;
+      return `${img}<div class="map-popup-title">${n}. ${title}</div>`;
     }
 
     function destroyMaps() {
@@ -645,8 +624,7 @@
         const popup = tour.markers[i].getPopup();
         if (popup) {
           popup.options.autoPan = true;
-          popup.options.autoPanPaddingTopLeft = L.point(12, 12);
-          popup.options.autoPanPaddingBottomRight = L.point(12, 48);
+          popup.options.autoPanPadding = [20, 28];
           popup.options.keepInView = true;
         }
         tour.markers[i].openPopup();
@@ -732,13 +710,11 @@
           });
           const marker = L.marker([a.lat, a.lng], { icon }).addTo(map);
           marker.bindPopup(popupHtml(n, a), {
-            maxWidth: 170,
-            minWidth: 140,
+            maxWidth: 150,
+            minWidth: 120,
             autoPan: true,
-            autoPanPaddingTopLeft: L.point(12, 12),
-            autoPanPaddingBottomRight: L.point(12, 48),
+            autoPanPadding: [20, 28],
             keepInView: true,
-            offset: L.point(0, -4),
           });
           marker.on("click", () => setMapStep(el.id, i));
           markers.push(marker);
